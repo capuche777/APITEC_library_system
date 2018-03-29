@@ -4,7 +4,7 @@ var enviar = document.querySelector('#btn_enviar');
 //Encargado de obtener el clic del boton enviar del formulario y llamar a la fucion para agregar usuarios
 enviar.addEventListener('click', agregarUsuario);
 
-//Funcion engargada de agregar los usuarios a los objetos
+//Funcion encargada de agregar los usuarios a los objetos
 function agregarUsuario(){
 
     var nombre = document.querySelector('#txt_nombres').value;
