@@ -2,18 +2,18 @@
 
 // Funcion para crear los departamentos
 function crearDeptos(el, i, arr) {
-    let _depto = {
+    const _depto = {
         departamento_id: i+1,
         nombre: el
     }
     Departamento.push(_depto)
     
     // Selecciona el Select para insertar los departamentos
-    var select = document.querySelector('#depto');
+    const select = document.querySelector('#depto');
     // Crea la etiqueta Option vacia
-    var optionDepto = document.createElement('option');
+    const optionDepto = document.createElement('option');
     // Indica el texto a insertar en el select
-    var optionContent = document.createTextNode(`${el}`)
+    const optionContent = document.createTextNode(`${el}`)
 
     // Inserta el atributo value a cada option
     optionDepto.setAttribute('value', `${i+1}`)

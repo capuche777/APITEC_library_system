@@ -1,20 +1,17 @@
-//Seleccona el boton enviar del formulario de registro de usuarios
-var enviar = document.querySelector('#btn_enviar');
-
 //Encargado de obtener el clic del boton enviar del formulario y llamar a la fucion para agregar usuarios
-enviar.addEventListener('click', agregarUsuario);
+enviar.addEventListener('click', agregarAdmin);
 
 //Funcion encargada de agregar los usuarios a los objetos
-function agregarUsuario(){
+function agregarAdmin(){
 
-    var nombre = document.querySelector('#txt_nombres').value;
-    var apellido = document.querySelector('#txt_apellidos').value;
-    var direccion = document.querySelector('#txt_direccion').value;
-    var telefono = document.querySelector('#tel_telefono').value;
-    var correo = document.querySelector('#mail_correo').value;
-    var password = document.querySelector('#pass_contrasenia').value;
+    const nombre = document.querySelector('#txt_nombres').value;
+    const apellido = document.querySelector('#txt_apellidos').value;
+    const direccion = document.querySelector('#txt_direccion').value;
+    const telefono = document.querySelector('#tel_telefono').value;
+    const correo = document.querySelector('#mail_correo').value;
+    const password = document.querySelector('#pass_contrasenia').value;
 
-    var usuario = {
+    const admin = {
         nombre: nombre,
         apellido: apellido,
         direccion: direccion,
@@ -23,11 +20,11 @@ function agregarUsuario(){
         password: password
     }
 
-    usuarios.push(usuario);
-    limpiarUsuario();
+    administradores.push(admin);
+    limpiarAdmin();
 }
 
-function limpiarUsuario() {
+function limpiarAdmin() {
     document.querySelector('#txt_nombres').value = "";
     document.querySelector('#txt_apellidos').value = "";
     document.querySelector('#txt_direccion').value = "";
