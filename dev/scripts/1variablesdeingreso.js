@@ -42,5 +42,11 @@ const munis = [
     ["Zacapa", "Estanzuela", "Río Hondo", "Gualán", "Teculután", "Usumatlán", "Cabañas", "San Diego", "La Unión", "Huite"]
 ];
 
-//Seleccona el boton enviar del formulario de registro de usuarios
+// Toma los elementos para crear un menu dinamico
+let dinamicoMuni =[];
+
+// Seleccona el boton enviar del formulario de registro de usuarios
 const enviar = document.querySelector('#btn_enviar');
+
+// Selecciona el elemento select#depto para generar dinamicamente los municipios
+const slcDepto = document.querySelector('#depto');

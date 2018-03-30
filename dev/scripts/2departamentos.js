@@ -41,3 +41,46 @@ for (var i=0, len=munis.length; i<len; i++) {
         Municipio.push(_mncipio);
     }
 }
+
+// Encargado de obtener el cambio en el select#depto para modificar la seleccion de municipios
+slcDepto.addEventListener('change', genArray);
+
+// Cada vez que hace un cambio en el Selet Departamentos se ejecuta la siguiente funcion
+function genArray(){
+    let seleccionado = this.options[slcDepto.selectedIndex].value;
+    //Coloca el array de menus a cero y al mismo tiempo limpia el select de municipios    
+    function limpiarSelect() {
+        if (dinamicoMuni.length > 0) {
+            dinamicoMuni = [];
+            // Selecciona el Select para realizar la limpieza y por ultimo limpia el array
+            const _select = document.querySelector('#mncipio');
+            _select.innerHTML = ' ';
+        }
+    }
+    limpiarSelect();
+
+    // Asigna los valores necesarios para generar el menu dinamico de muicipios
+    for (var i in Municipio) {
+        if (Municipio[i].departamento_id == seleccionado) {
+            dinamicoMuni.push(Municipio[i].nombre);
+        }
+    };
+    // Funcion para crear los municipios
+    function crearMenuMunis(el, i, arr) {
+        // Selecciona el Select para insertar los municipios
+        const select = document.querySelector('#mncipio');
+        // Crea la etiqueta Option vacia
+        const optionDepto = document.createElement('option');
+        // Indica el texto a insertar en el select
+        const optionContent = document.createTextNode(`${el}`);
+
+        // Inserta el atributo value a cada option
+        optionDepto.setAttribute('value', `${i+1}`);
+        // Le inserta el texto a cada uno de los options
+        optionDepto.appendChild(optionContent);
+        // Inserta cada option en el Select
+        select.appendChild(optionDepto);
+    };
+    
+    dinamicoMuni.forEach(crearMenuMunis);
+};
