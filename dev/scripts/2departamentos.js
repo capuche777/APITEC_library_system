@@ -48,6 +48,7 @@ slcDepto.addEventListener('change', genArray);
 // Cada vez que hace un cambio en el Selet Departamentos se ejecuta la siguiente funcion
 function genArray(){
     let seleccionado = this.options[slcDepto.selectedIndex].value;
+    choosenDpto = seleccionado;
     //Coloca el array de menus a cero y al mismo tiempo limpia el select de municipios    
     function limpiarSelect() {
         if (dinamicoMuni.length > 0) {
@@ -84,3 +85,11 @@ function genArray(){
     
     dinamicoMuni.forEach(crearMenuMunis);
 };
+
+const slcMncipio = document.querySelector('#mncipio');
+slcMncipio.addEventListener('change', getMncipio);
+
+function getMncipio() {
+    let Munseleccionado = this.options[slcMncipio.selectedIndex].value;
+    choosenMncipio = Munseleccionado;
+}

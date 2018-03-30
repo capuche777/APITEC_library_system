@@ -1,3 +1,8 @@
+/*
+ *Las siguientes variables son necesarias para la creacion de usuarios 
+ * 
+ */
+
 // Array que almacena los usuarios ingresados
 let administradores = [];
 
@@ -44,6 +49,15 @@ const munis = [
 
 // Toma los elementos para crear un menu dinamico
 let dinamicoMuni =[];
+
+// Variable creada para asignar el ID a los usuarios registrados
+let countIdAdmin = 1;
+
+// variable que asigna el departamento a los usuarios registrados
+let choosenDpto = undefined;
+
+//variable que asigna el departamento a los usuarios registrados
+let choosenMncipio = undefined;
 
 // Seleccona el boton enviar del formulario de registro de usuarios
 const enviar = document.querySelector('#btn_enviar');

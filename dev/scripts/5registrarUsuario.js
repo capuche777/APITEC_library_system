@@ -10,20 +10,39 @@ function agregarAdmin(){
     const telefono = document.querySelector('#tel_telefono').value;
     const correo = document.querySelector('#mail_correo').value;
     const password = document.querySelector('#pass_contrasenia').value;
+    let genero = document.getElementsByName('genero');
+    // Recorre los select de genero
+    for (var i = 0; i < genero.length; i++){
+        if (genero[i].checked) {
+            genero = genero[i].value;
+        }
+    }
+    const nac = document.querySelector('#txt_nac').value;
+    const cui = document.querySelector('#txt_cui').value;
+    // Para validacion, pendiente let auth = document.querySelector('#rad_auth');
 
     const admin = {
+        administrador_id: countIdAdmin,
         nombre: nombre,
         apellido: apellido,
         direccion: direccion,
         telefono: telefono,
         correo: correo,
-        password: password
+        password: password,
+        genero: genero,
+        nacimiento: nac,
+        cui: cui,
+        departamento: choosenDpto,
+        municipio: choosenMncipio
     }
 
     administradores.push(admin);
+    countIdAdmin = countIdAdmin+1;
     limpiarAdmin();
 }
 
+
+// Re inicia los valores del formulario de registro de Administradores
 function limpiarAdmin() {
     document.querySelector('#txt_nombres').value = "";
     document.querySelector('#txt_apellidos').value = "";
