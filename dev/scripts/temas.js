@@ -18,7 +18,7 @@ for (var i in temas) {
             contenidoTabla += `<td>${temas[i].tema}</td>`
             contenidoTabla += `<td>${temas[i].fecha_ingreso}</td>`
             contenidoTabla += `<td id='edit${temas[i].tema_id}'>Editar</td>`
-            contenidoTabla += `<td id='${temas[i].tema_id}' class='del'>Eliminar</td>`
+            contenidoTabla += `<td id='${temas[i].tema_id}' onclick="TemaEliminar(${i})">Eliminar</td>`
     }
 };
 
@@ -36,17 +36,9 @@ tabla.innerHTML = `
         </tbody>
     </table>
 `;
-const td = document.getElementsByClassName('del');
 
-for (var i = 0; i < td.length; i++){
-    td[i].addEventListener('click', rmTema);
-    function rmTema() {
-        for (var j = 0; j < td.length; j++) {
-            if (this.getAttribute('ID') == temas[j]['tema_id']) {
-                temas[j] = 0;
-                localStorage.setItem('temas', JSON.stringify(temas));
-                location.reload();
-            }
-        }
+    function TemaEliminar(tema) {
+        temas.splice(tema, 1);
+        temas = localStorage.setItem('temas', JSON.stringify(temas));
+        window.location.reload();
     }
-}

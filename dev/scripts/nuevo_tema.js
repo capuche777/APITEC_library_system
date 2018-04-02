@@ -28,8 +28,17 @@ const nuevoTema = document.querySelector('#btn_ingreso_tema_aceptar');
 
 // Monitorea el clic sobre el boton asignado anteriormente
 nuevoTema.addEventListener('click', agregarTema);
+
+
 let topicID = 1;
 
+function incrementarID() {
+    if (temas.length > 0) {
+        topicID = temas[temas.length-1].tema_id+1;
+    } else {
+        topicID = 1;
+    }
+}
 
 //Funcion encargada de crear los temas
 function agregarTema() {
@@ -43,10 +52,8 @@ function agregarTema() {
     }
 
     temas.push(tema);
-    for (let i = 0; i < temas.length; i++) {
-        topicID = temas[i]['tema_id']+1;
-    }
     localStorage.setItem('temas', JSON.stringify(temas));
+    incrementarID();
     limpiarTemaForm();
 }
 
