@@ -1,13 +1,11 @@
  // Existe localStorage?
  let temas;
-try {
-    if (localStorage.getItem) {
+
+    if (localStorage.getItem('temas')) {
         temas = JSON.parse(localStorage.getItem('temas'));
+    } else {
+        temas = [];
     }
-} catch(err) {
-    console.log('error');
-    temas = [];
-}
 
 
 // constantes que indican que se utilizara un formato de fecha
