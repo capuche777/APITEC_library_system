@@ -49,16 +49,16 @@ gulp.task('browserSync', function () {
     })
 });
 
-gulp.task('scripts', function() {
+/*gulp.task('scripts', function() {
     return gulp.src('./dev/scripts/*.js')
       .pipe(concat('script.js'))
       .pipe(stripCssComments(false))
       .pipe(gulp.dest('./dist/assets/js'))
       .pipe(browserSync.stream())
-  });
+  });*/
 
-gulp.task('watch', ['pug', 'scripts', 'browserSync', 'css'], function () {
+gulp.task('watch', ['pug', 'browserSync', 'css', 'copy'], function () {
     gulp.watch('dev/pug/**/*.pug', ['pug']);
     gulp.watch('dev/sass/**/*.scss', ['css']);
-    gulp.watch('dev/scripts/**/*.js', ['scripts']);
+    gulp.watch('dev/scripts/**/*.js', ['copy']);
 });

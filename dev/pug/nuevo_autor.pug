@@ -1,0 +1,36 @@
+extends includes/layout
+
+block content
+    .div_ventana
+        .div_ventana__titulo
+            p #{title}
+        .div_encabezado
+            h2 Agregar nuevo autor
+        .div_formulario
+            label(for="txt_nombre_autor") Nombre:
+            p: input#txt_nombre_autor(type="text", name="txt_nombre_autor")
+
+            label(for="txt_apellido_autor") Apellido:
+            p: input#txt_apellido_autor(type="text", name="txt_apellido_autor")
+
+            p Nacionalidad
+                select#slc_autor_pais(name="slc_autor_pais")
+                    option(value="0") Selecciona un pais
+
+            p Genero
+                input(type="radio", name="gener" value="1" id="rad_autor_masculino")
+                label(for="rad_autor_masculino") Masculino #[br]
+                input(type="radio", name="gener" value="0" id="rad_autor_femenino")
+                label(for="rad_autor_femenino") Femenino
+
+            label(for="txt_autor_fecha_nacimiento") Fecha de Nacimiento:
+            p: input#txt_autor_fecha_nacimiento(type="text", name="txt_autor_fecha_nacimiento")
+
+            label(for="txt_autor_fecha_fallecimiento") Fecha de Fallecimiento:
+            p: input#txt_autor_fecha_fallecimiento(type="text", name="txt_autor_fecha_fallecimiento")
+
+            label(for="txt_ingreso_fecha_autor") Fecha de Ingreso:
+            p: input#txt_ingreso_fecha_autor(type="text", name="txt_ingreso_fecha_autor")
+        
+        button#btn_ingreso_autor_regresar Regresar
+        button#btn_ingreso_autor_aceptar Aceptar
