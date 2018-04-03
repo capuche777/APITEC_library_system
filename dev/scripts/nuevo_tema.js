@@ -38,7 +38,12 @@ function incrementarID() {
     } else {
         topicID = 1;
     }
-}
+};
+
+// funcion para regresar a la pagina de temas
+document.querySelector('#btn_ingreso_tema_regresar').addEventListener('click', function(){
+    window.location.href='/temas.html';
+});
 
 //Funcion encargada de crear los temas
 function agregarTema() {
