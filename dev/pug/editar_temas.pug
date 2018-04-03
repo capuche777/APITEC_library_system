@@ -1,0 +1,14 @@
+div
+    .contenedor.editar
+        .div_formulario
+            label(for="txt_editar_tema") Tema:
+            p: input#txt_editar_tema(type="text", name="txt_editar_tema")
+
+            label(for="txt_editar_fecha_tema") Fecha de Ingreso:
+            p: input#txt_editar_fecha_tema(type="text", name="txt_editar_fecha_tema")
+
+            button#regresar: a(href="/temas.html") Regresar
+            button#guardar Guardar
+
+
+script(src="assets/js/editar_temas.js")

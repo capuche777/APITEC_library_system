@@ -17,7 +17,7 @@ for (var i in temas) {
             contenidoTabla += `<td>${temas[i].tema_id}</td>`
             contenidoTabla += `<td>${temas[i].tema}</td>`
             contenidoTabla += `<td>${temas[i].fecha_ingreso}</td>`
-            contenidoTabla += `<td id='edit${temas[i].tema_id}'>Editar</td>`
+            contenidoTabla += `<td id='edit${temas[i].tema_id}' onclick="TemaEditar(${i})">Editar</td>`
             contenidoTabla += `<td id='${temas[i].tema_id}' onclick="TemaEliminar(${i})">Eliminar</td>`
     }
 };
@@ -36,6 +36,16 @@ tabla.innerHTML = `
         </tbody>
     </table>
 `;
+
+    function TemaEditar(_tema) {
+        let tema;
+        for (let i in temas) {
+            if (_tema+1 == temas[i].tema_id) {
+                tema = _tema;
+            }
+        }
+        tema = localStorage.setItem('tema_edit', JSON.stringify(tema));
+    }
 
     function TemaEliminar(tema) {
         temas.splice(tema, 1);
