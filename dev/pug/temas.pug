@@ -1,9 +1,16 @@
-div
-    .nuevo_tema
-        button#agregar_tema Agregar
-    .contenedor.tabla
-    .contenedor.nav
-        button#anterior Anterior
-        button#siguiente Siguiente
+extends includes/layout
 
-script(src="assets/js/temas.js")
+block content
+    div
+        .nuevo_tema
+            button#agregar_tema Agregar
+        .contenedor.tabla
+        .contenedor.nav
+            button#anterior.ocultar Anterior
+            input#mostrar(type="number", name="mostrar")
+            button#siguiente Siguiente
+
+        .contenedor
+            table#tabla2
+
+    script(src="assets/js/temas.js")

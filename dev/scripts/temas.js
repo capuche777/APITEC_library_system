@@ -1,6 +1,7 @@
 temas = JSON.parse(localStorage.getItem('temas'));
 
 const tabla =  document.querySelector('.tabla');
+const tabla2 =  document.querySelector('#tabla2');
 let contenidoTabla = '';
 
 let filas = temas.length;
@@ -19,13 +20,24 @@ for (var i in temas) {
     if (temas[i] == 0) {
         console.log('tiene vacios');
     } else {
-        contenidoTabla += "<tr>"
+        contenidoTabla += "<tr class='ocultar'>"
             contenidoTabla += `<td>${temas[i].tema_id}</td>`
             contenidoTabla += `<td>${temas[i].tema}</td>`
             contenidoTabla += `<td>${temas[i].fecha_ingreso}</td>`
             contenidoTabla += `<td id='edit${temas[i].tema_id}' onclick="TemaEditar(${i})">Editar</td>`
             contenidoTabla += `<td id='${temas[i].tema_id}' onclick="TemaEliminar(${i})">Eliminar</td>`
     }
+
+    /*var row =  tabla2.insertRow(i);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+
+    cell1.innerHTML = `${temas[i].tema_id}`;
+    cell2.innerHTML = `${temas[i].tema}`;
+    cell3.innerHTML = `${temas[i].fecha_ingreso}`;
+    cell.innerHTML = `${temas[i].tema_id}`;
+    cell.innerHTML = `${temas[i].tema_id}`;*/
 };
 
 // Inserta la tabala en el contenedor
@@ -48,10 +60,14 @@ let tr = document.getElementsByTagName('TR');
 let anterior = document.querySelector('#anterior');
 let siguiente = document.querySelector('#siguiente');
 
-
-for (let i = 0; i < tr.length; i++) {
-    if (i < 5) {
-        tr[i].classList.add('ocultar');
+//cantidad de elementos a mostrar en la tabla
+let mostrarInicio = 0;
+let mostrarFinal = 10;
+const pivote = mostrarFinal;
+// por default todos los elementos en la tabla estan ocultos, la siguiente funcion hace que se muestren solo los primeros 5
+for (let i = mostrarInicio; i < tr.length; i++) {
+    if (i <= mostrarFinal) {
+        tr[i].classList.remove('ocultar');
     }
 }
 
@@ -75,13 +91,20 @@ function TemaEliminar(tema) {
     window.location.reload();
 }
 
-// funcion que muestra los elementos de 5 en 5
+// funcion que muestra los elementos en pantalla al presionar el boton siguientes
 siguiente.addEventListener('click', function(){
-    _mostrar = 5
+    mostrarInicio = mostrarInicio+pivote;
+    mostrarFinal = mostrarFinal+pivote;
+    anterior.classList.remove('ocultar');
     for (let i = 0; i < tr.length; i++) {
-        if (i >= _mostrar) {
-            tr[i].style.display = 'block';
-            anterior.style.display = 'block';
+        /* TR1 en el indice 1 contiene los encabezados de la tabla, por esa razon no se les cambia la clase
+        si los elementos son menores al indice de mostrar esta agrega la clase ocultar para que no sean visibles*/
+        if (i == 0) {
+            tr[i].classList.remove('ocultar');
+        } else if (i > mostrarInicio && i <= mostrarFinal) {
+            tr[i].classList.remove('ocultar');
+        } else if (i <= mostrarInicio) {
+            tr[i].classList.add('ocultar');
         }
     }
 });
