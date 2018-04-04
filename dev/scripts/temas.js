@@ -56,14 +56,14 @@ tabla.innerHTML = `
 `;
 
 // Solo se deben mostrar 5 resultados para el ejemplo
-let tr = document.getElementsByTagName('TR');
-let anterior = document.querySelector('#anterior');
-let siguiente = document.querySelector('#siguiente');
+const tr = document.getElementsByTagName('TR');
+const anterior = document.querySelector('#anterior');
+const siguiente = document.querySelector('#siguiente');
 
 //cantidad de elementos a mostrar en la tabla
 let mostrarInicio = 0;
-let mostrarFinal = 10;
-const pivote = mostrarFinal;
+let mostrarFinal = 5;
+let pivote = 5;
 // por default todos los elementos en la tabla estan ocultos, la siguiente funcion hace que se muestren solo los primeros 5
 for (let i = mostrarInicio; i < tr.length; i++) {
     if (i <= mostrarFinal) {
@@ -91,7 +91,31 @@ function TemaEliminar(tema) {
     window.location.reload();
 }
 
-// funcion que muestra los elementos en pantalla al presionar el boton siguientes
+/*
+funcion que muestra los elementos en pantalla al presionar el boton anterior
+segun las variables, mostrarInicio, mostrarFinal, usando el pivote como contador
+de los elementos en pantalla
+*/
+anterior.addEventListener('click', function(){
+    mostrarInicio = mostrarInicio-pivote;
+    mostrarFinal = mostrarFinal-pivote;
+
+    for (let i = 0; i < tr.length; i++) {
+        if (i == 0) {
+            tr[i].classList.remove('ocultar');
+        } else if (i > mostrarInicio && i <= mostrarFinal) {
+            tr[i].classList.remove('ocultar');
+        } else if (i >= mostrarInicio) {
+            tr[i].classList.add('ocultar');
+        }
+    }
+});
+
+/*
+funcion que muestra los elementos en pantalla al presionar el boton siguientes
+segun las variables, mostrarInicio, mostrarFinal, usando el pivote como contador
+de los elementos en pantalla
+*/
 siguiente.addEventListener('click', function(){
     mostrarInicio = mostrarInicio+pivote;
     mostrarFinal = mostrarFinal+pivote;
