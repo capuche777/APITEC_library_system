@@ -1,8 +1,9 @@
  // Existe localStorage?
  let temas;
-
+ let topicID = 0;
     if (localStorage.getItem('temas')) {
         temas = JSON.parse(localStorage.getItem('temas'));
+        incrementarID();
     } else {
         temas = [];
     }
@@ -30,7 +31,7 @@ const nuevoTema = document.querySelector('#btn_ingreso_tema_aceptar');
 nuevoTema.addEventListener('click', agregarTema);
 
 
-let topicID = 1;
+
 
 function incrementarID() {
     if (temas.length > 0) {
