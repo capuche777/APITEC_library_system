@@ -59,6 +59,9 @@ tabla.innerHTML = `
 const tr = document.getElementsByTagName('TR');
 const anterior = document.querySelector('#anterior');
 const siguiente = document.querySelector('#siguiente');
+let imprimirInicio = document.querySelector('.inicio');
+let imprimirFinal = document.querySelector('.final') ;
+let imprimirTotal = document.querySelector('.total');
 
 //cantidad de elementos a mostrar en la tabla
 let mostrarInicio = 0;
@@ -69,6 +72,9 @@ for (let i = mostrarInicio; i < tr.length; i++) {
     if (i <= mostrarFinal) {
         tr[i].classList.remove('ocultar');
     }
+    imprimirInicio.innerHTML = `${mostrarInicio+1}`;
+    imprimirFinal.innerHTML = `${mostrarFinal}`;
+    imprimirTotal.innerHTML = `${temas.length}`
 }
 
 /* La funcion recibe el indice del elemento a editar, lo almacena en una variable para poder realizar la edicion en la pantalla
@@ -109,6 +115,9 @@ anterior.addEventListener('click', function(){
             tr[i].classList.add('ocultar');
         }
     }
+    imprimirInicio.innerHTML = `${mostrarInicio+1}`;
+    imprimirFinal.innerHTML = `${mostrarFinal}`;
+    imprimirTotal.innerHTML = `${temas.length}`
 });
 
 /*
@@ -131,4 +140,7 @@ siguiente.addEventListener('click', function(){
             tr[i].classList.add('ocultar');
         }
     }
+    imprimirInicio.innerHTML = `${mostrarInicio+1}`;
+    imprimirFinal.innerHTML = `${mostrarFinal}`;
+    imprimirTotal.innerHTML = `${temas.length}`
 });
