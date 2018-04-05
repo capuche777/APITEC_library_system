@@ -98,6 +98,25 @@ function TemaEliminar(tema) {
 }
 
 /*
+La siguiente funcion oculta el boton anterior si el primer elemento no cuenta con la clase ocultar
+y el boton siguiente si el ultimo elemento mostrado si tiene la clase ocultar. Al mismo tiempo actualiza
+el valor de los articulos que se muestran en pantalla
+*/
+function OcultarBotonera() {
+    for (let i in tr) {
+        if (tr[1].getAttribute('class') == '') {
+            anterior.classList.add('ocultar');
+            siguiente.classList.remove('ocultar');
+        } else if (tr[tr.length-1].getAttribute('class') == '') {
+            siguiente.classList.add('ocultar');
+            anterior.classList.remove('ocultar');
+            imprimirFinal.innerHTML = `${temas.length}`;
+        }
+    }
+}
+
+
+/*
 funcion que muestra los elementos en pantalla al presionar el boton anterior
 segun las variables, mostrarInicio, mostrarFinal, usando el pivote como contador
 de los elementos en pantalla
@@ -105,7 +124,7 @@ de los elementos en pantalla
 anterior.addEventListener('click', function(){
     mostrarInicio = mostrarInicio-pivote;
     mostrarFinal = mostrarFinal-pivote;
-
+    siguiente.classList.remove('ocultar');
     for (let i = 0; i < tr.length; i++) {
         if (i == 0) {
             tr[i].classList.remove('ocultar');
@@ -115,9 +134,11 @@ anterior.addEventListener('click', function(){
             tr[i].classList.add('ocultar');
         }
     }
+    
     imprimirInicio.innerHTML = `${mostrarInicio+1}`;
     imprimirFinal.innerHTML = `${mostrarFinal}`;
     imprimirTotal.innerHTML = `${temas.length}`
+    OcultarBotonera();
 });
 
 /*
@@ -140,7 +161,9 @@ siguiente.addEventListener('click', function(){
             tr[i].classList.add('ocultar');
         }
     }
+    
     imprimirInicio.innerHTML = `${mostrarInicio+1}`;
     imprimirFinal.innerHTML = `${mostrarFinal}`;
     imprimirTotal.innerHTML = `${temas.length}`
+    OcultarBotonera();
 });
