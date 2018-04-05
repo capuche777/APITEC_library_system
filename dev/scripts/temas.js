@@ -21,7 +21,7 @@ for (var i in temas) {
         console.log('tiene vacios');
     } else {
         contenidoTabla += "<tr class='ocultar'>"
-            contenidoTabla += `<td>${i+1}</td>`
+            contenidoTabla += `<td>${parseInt(i)+1}</td>`
             contenidoTabla += `<td>${temas[i].tema}</td>`
             contenidoTabla += `<td>${temas[i].fecha_ingreso}</td>`
             contenidoTabla += `<td id='edit${temas[i].tema_id}' onclick="TemaEditar(${i})">Editar</td>`
