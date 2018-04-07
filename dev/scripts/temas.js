@@ -65,16 +65,16 @@ let imprimirTotal = document.querySelector('.total');
 
 //cantidad de elementos a mostrar en la tabla
 let mostrarInicio = 0;
-let mostrarFinal = 5;
-let pivote = 5;
-// por default todos los elementos en la tabla estan ocultos, la siguiente funcion hace que se muestren solo los primeros 5
+let mostrarFinal = 10;
+let pivote = 10;
+// por default todos los elementos en la tabla estan ocultos, la siguiente funcion hace que se muestren solo los primeros 10
 for (let i = mostrarInicio; i < tr.length; i++) {
     if (i <= mostrarFinal) {
         tr[i].classList.remove('ocultar');
     }
     imprimirInicio.innerHTML = `${mostrarInicio+1}`;
     imprimirFinal.innerHTML = `${mostrarFinal}`;
-    imprimirTotal.innerHTML = `${temas.length}`
+    imprimirTotal.innerHTML = `${temas.length}`;
 }
 
 /* La funcion recibe el indice del elemento a editar, lo almacena en una variable para poder realizar la edicion en la pantalla
