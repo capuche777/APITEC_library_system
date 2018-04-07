@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/capuche777/APITEC_library_system#readme",
   "dependencies": {
-    "browser-sync": "^2.23.6",
-    "gulp": "^3.9.1"
+    "browser-sync": "^2.23.6"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^4.1.0",

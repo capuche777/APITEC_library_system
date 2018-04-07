@@ -1,12 +1,15 @@
- // Existe localStorage?
+ 
  let temas;
  let topicID = 0;
-    if (localStorage.getItem('temas')) {
-        temas = JSON.parse(localStorage.getItem('temas'));
-        incrementarID();
-    } else {
-        temas = [];
-    }
+
+ // Existe localStorage?
+ 
+if (localStorage.getItem('temas')) {
+    temas = JSON.parse(localStorage.getItem('temas'));
+    incrementarID();
+} else {
+    temas = [];
+}
 
 
 // constantes que indican que se utilizara un formato de fecha

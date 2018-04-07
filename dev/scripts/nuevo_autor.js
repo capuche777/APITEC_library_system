@@ -1,5 +1,25 @@
 // Array que almacena los autores ingresados
-let paises = [];
+let autores;
+
+// Array que almacena los objetos de los paices para poder trabajar con ellos
+let paises;
+
+// Chequear si existe autores en localStorage
+if (localStorage.getItem('autores')) {
+    autores = JSON.parse(localStorage.getItem('autores'));
+    AutorIDSum();
+} else {
+    autores = [];
+}
+
+// Chequear si existe el objeto Paises en localStorage
+if (localStorage.getItem('paises')) {
+    paises = JSON.parse(localStorage.getItem('paises'));
+} else {
+    paises = [];
+}
+
+//Array que contiene los paices del mundo para ser insertados en el select
 const mundo = ["Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia",
 "Argentina", "Armenia", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin", "Bélgica", "Belice",
 "Benín", "Bielorrusia", "Birmania", "Bolivia", "Bosnia y Herzegovina", "Botsuana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso",
@@ -20,7 +40,8 @@ const mundo = ["Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antig
 "Sudán", "Sudán del Sur", "Suecia", "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistán", "Timor Oriental", "Togo", "Tonga",
 "Trinidad y Tobago", "Túnez", "Turkmenistán", "Turquía", "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu",
 "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue"];
-let autores = [];
+
+// Se ha declarado para obtener el valor seleccionado del usuario
 let choosenPais = undefined;
 
 const slcPais = document.querySelector('#slc_autor_pais');
@@ -46,8 +67,10 @@ mundo.forEach(crearPaises);
 
 const nuevoAutor = document.querySelector('#btn_ingreso_autor_aceptar');
 
+// Monitorea cuando el boton de aceptar es presionado
 nuevoAutor.addEventListener('click', agregarAutor);
 
+// Duncion que se ejecuta cuando se presiona el boton Agregar agutor, debe almacenar los datos en local storage
 function agregarAutor(){
     const autorNombre = document.querySelector('#txt_nombre_autor').value;
     const autorApellido = document.querySelector('#txt_apellido_autor').value;
