@@ -130,6 +130,7 @@ function agregarAutor(){
     limpiarAutorForm();
 }
 
+//funcion encargada de limpiar el formulario de autores
 function limpiarAutorForm() {
     document.querySelector('#txt_nombre_autor').value = "";
     document.querySelector('#txt_apellido_autor').value = "";
@@ -138,7 +139,15 @@ function limpiarAutorForm() {
     document.querySelector('#txt_ingreso_fecha_autor').value = dateToday;
 }
 
+// funcion para obtener el pais que selecciona el usuario
 function getPais() {
     let paisSeleccionado = this.options[slcPais.selectedIndex].value;
     choosenPais = paisSeleccionado;
 }
+
+// selecciona el boton regresar del usuario
+const regresar = document.querySelector('#btn_ingreso_autor_regresar');
+
+regresar.addEventListener('click', function(){
+    window.location.href='/autores.html';
+});
