@@ -1,0 +1,14 @@
+extends includes/layout
+
+block content
+    div
+        .nuevo_autor
+            button#agregar_autor Agregar
+        .contenedor.tabla
+        .contenedor.nav
+            button#anterior.ocultar Anterior
+            p Del #[span.inicio] al #[span.final] de #[span.total]
+            //-input#mostrar(type="number", name="mostrar")
+            button#siguiente Siguiente
+
+            script(src="assets/js/autores.js")
