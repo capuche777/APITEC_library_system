@@ -33,9 +33,7 @@ const nuevoTema = document.querySelector('#btn_ingreso_tema_aceptar');
 // Monitorea el clic sobre el boton asignado anteriormente
 nuevoTema.addEventListener('click', agregarTema);
 
-
-
-
+// Auto incrementa el ID de los temas
 function incrementarID() {
     if (temas.length > 0) {
         topicID = temas[temas.length-1].tema_id+1;

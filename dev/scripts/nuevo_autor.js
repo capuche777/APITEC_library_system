@@ -1,8 +1,9 @@
 // Array que almacena los autores ingresados
 let autores;
-
 // Array que almacena los objetos de los paices para poder trabajar con ellos
 let paises;
+// Variable para definir el ID del Autor
+let autorID = 0;
 
 // Chequear si existe autores en localStorage
 if (localStorage.getItem('autores')) {
@@ -54,6 +55,8 @@ function crearPaises(el, i, arr) {
          nombre: el
     }
     paises.push(pais);
+    // coloca el objeto paises en el local storage
+    localStorage.setItem('paises', JSON.stringify(paises));
 
     const optPais = document.createElement('option');
     const optPaisCont = document.createTextNode(`${el}`);
@@ -65,6 +68,32 @@ function crearPaises(el, i, arr) {
 }
 mundo.forEach(crearPaises);
 
+// constantes que indican el formato de fecha a utilizar
+const d = new Date();
+const m = new Date();
+const y = new Date();
+
+// constantes para obtener la fecha actual
+const day = d.getDate();
+const month = m.getMonth();
+const year = m.getFullYear();
+
+// constante para indicar la fecha del dia de ingreso del autor
+const dateToday = `${day}/${month+1}/${year}`;
+
+// Auto imprime la fecha del dia en el imput de fecha de ingreso
+const autorIngresoFec = document.querySelector('#txt_ingreso_fecha_autor').value = dateToday;
+
+// Funcion para autor Incrementar el ID de los autores
+function AutorIDSum(){
+    if (autores.length > 0) {
+        autorID = autores[autores.length-1].autor_id+1;
+    } else {
+        autorID = 1;
+    }
+}
+
+//selecciona el boton de aceptar para el ingreso de autores
 const nuevoAutor = document.querySelector('#btn_ingreso_autor_aceptar');
 
 // Monitorea cuando el boton de aceptar es presionado
@@ -84,7 +113,6 @@ function agregarAutor(){
     }
     const autorBirth = document.querySelector('#txt_autor_fecha_nacimiento').value;
     const autorDeath = document.querySelector('#txt_autor_fecha_fallecimiento').value;
-    const autorIngresoFec = document.querySelector('#txt_ingreso_fecha_autor').value;
 
     var autor = {
         autor_id: autores.length+1,
@@ -107,7 +135,7 @@ function limpiarAutorForm() {
     document.querySelector('#txt_apellido_autor').value = "";
     document.querySelector('#txt_autor_fecha_nacimiento').value = "";
     document.querySelector('#txt_autor_fecha_fallecimiento').value = "";
-    document.querySelector('#txt_ingreso_fecha_autor').value = "";
+    document.querySelector('#txt_ingreso_fecha_autor').value = dateToday;
 }
 
 function getPais() {
