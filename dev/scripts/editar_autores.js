@@ -1,25 +1,7 @@
-// Array que almacena los autores ingresados
-let autores;
-// Array que almacena los objetos de los paices para poder trabajar con ellos
-let paises;
-// Variable para definir el ID del Autor
-let autorID = 0;
-
-// Chequear si existe autores en localStorage
-if (localStorage.getItem('autores')) {
-    autores = JSON.parse(localStorage.getItem('autores'));
-    AutorIDSum();
-} else {
-    autores = [];
-}
-
-// Chequear si existe el objeto Paises en localStorage
-if (localStorage.getItem('paises')) {
-    paises = JSON.parse(localStorage.getItem('paises'));
-} else {
-    paises = [];
-}
-
+// Obtener los objetos necesarios del localStorage
+autores = JSON.parse(localStorage.getItem('autores'));
+autor_edit = parseInt(localStorage.getItem('autor_edit'));
+let paises = [];
 //Array que contiene los paices del mundo para ser insertados en el select
 const mundo = ["Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia",
 "Argentina", "Armenia", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin", "Bélgica", "Belice",
@@ -68,87 +50,55 @@ function crearPaises(el, i, arr) {
 }
 mundo.forEach(crearPaises);
 
-// constantes que indican el formato de fecha a utilizar
-const d = new Date();
-const m = new Date();
-const y = new Date();
-
-// constantes para obtener la fecha actual
-const day = d.getDate();
-const month = m.getMonth();
-const year = m.getFullYear();
-
-// constante para indicar la fecha del dia de ingreso del autor
-const dateToday = `${day}/${month+1}/${year}`;
-
-// Auto imprime la fecha del dia en el imput de fecha de ingreso
-const autorIngresoFec = document.querySelector('#txt_ingreso_fecha_autor').value = dateToday;
-
-// Funcion para autor Incrementar el ID de los autores
-function AutorIDSum(){
-    if (autores.length > 0) {
-        autorID = autores[autores.length-1].autor_id+1;
-    } else {
-        autorID = 1;
-    }
-}
-
-//selecciona el boton de aceptar para el ingreso de autores
-const nuevoAutor = document.querySelector('#btn_ingreso_autor_aceptar');
-
-// Monitorea cuando el boton de aceptar es presionado
-nuevoAutor.addEventListener('click', agregarAutor);
-
-// Duncion que se ejecuta cuando se presiona el boton Agregar agutor, debe almacenar los datos en local storage
-function agregarAutor(){
-    const autorNombre = document.querySelector('#txt_nombre_autor').value;
-    const autorApellido = document.querySelector('#txt_apellido_autor').value;
-    let autorNac = choosenPais;
-    let genero = document.getElementsByName('genero');
-    // Recorre los select de genero
-    for (var i = 0; i < genero.length; i++){
-        if (genero[i].checked) {
-            genero = genero[i].value;
-        }
-    }
-    const autorBirth = document.querySelector('#txt_autor_fecha_nacimiento').value;
-    const autorDeath = document.querySelector('#txt_autor_fecha_fallecimiento').value;
-
-    var autor = {
-        autor_id: autores.length+1,
-        nombre: autorNombre,
-        apellido: autorApellido,
-        nacionalidad: autorNac,
-        genero: genero,
-        nacimiento: autorBirth,
-        fallecimiento: autorDeath,
-        fecha_ingreso: autorIngresoFec
-    }
-
-    autores.push(autor);
-    localStorage.setItem('autores', JSON.stringify(autores));
-    AutorIDSum();
-    limpiarAutorForm();
-}
-
-//funcion encargada de limpiar el formulario de autores
-function limpiarAutorForm() {
-    document.querySelector('#txt_nombre_autor').value = "";
-    document.querySelector('#txt_apellido_autor').value = "";
-    document.querySelector('#txt_autor_fecha_nacimiento').value = "";
-    document.querySelector('#txt_autor_fecha_fallecimiento').value = "";
-    document.querySelector('#txt_ingreso_fecha_autor').value = dateToday;
-}
-
 // funcion para obtener el pais que selecciona el usuario
 function getPais() {
     let paisSeleccionado = this.options[slcPais.selectedIndex].value;
     choosenPais = paisSeleccionado;
 }
 
-// selecciona el boton regresar del usuario
-const regresar = document.querySelector('#btn_ingreso_autor_regresar');
+const nombre = document.querySelector('#txt_nombre_autor').value = autores[autor_edit]['nombre'];
+const apellido = document.querySelector('#txt_apellido_autor').value = autores[autor_edit]['apellido'];
+const autor_pais = document.querySelector('#slc_autor_pais').value = autores[autor_edit]['nacionalidad'];
+choosenPais = document.querySelector('#slc_autor_pais').value = autores[autor_edit]['nacionalidad'];
+let genero = document.getElementsByName('genero');
+    // Recorre los select de genero
+    for (var i = 0; i < genero.length; i++){
+        if (autores[autor_edit].genero == "1") {
+            genero[0].setAttribute('checked', true);
+        } else {
+            genero[1].setAttribute('checked', true);
+        }
+    }
+const autor_nacimiento = document.querySelector('#txt_autor_fecha_nacimiento').value = autores[autor_edit]['nacimiento'];
+const autor_fallecimiento = document.querySelector('#txt_autor_fecha_fallecimiento').value = autores[autor_edit]['fallecimiento'];
+const ingreso = document.querySelector('#txt_ingreso_fecha_autor').value = autores[autor_edit]['fecha_ingreso'];
 
-regresar.addEventListener('click', function(){
+// Selecciona el boton guardar
+const guardar = document.querySelector('#btn_guardar');
+
+guardar.addEventListener('click', function() {
+    
+    for (var i = 0; i < genero.length; i++){
+        if (genero[i].checked) {
+            genero = genero[i].value;
+        }
+    }
+    var autor = {
+        autor_id: autores[autor_edit]['autor_id'],
+        nombre: document.querySelector('#txt_nombre_autor').value,
+        apellido: document.querySelector('#txt_apellido_autor').value,
+        nacionalidad: choosenPais,
+        genero: genero,
+        nacimiento: document.querySelector('#txt_autor_fecha_nacimiento').value,
+        fallecimiento: document.querySelector('#txt_autor_fecha_fallecimiento').value,
+        fecha_ingreso: autores[autor_edit].fecha_ingreso,
+    }
+
+    autores[autor_edit] = autor;
+    localStorage.setItem('autores', JSON.stringify(autores));
+    window.location.href='/autores.html';
+});
+
+document.querySelector('#btn_regresar').addEventListener('click', function(){
     window.location.href='/autores.html';
 });

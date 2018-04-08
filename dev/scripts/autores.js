@@ -16,11 +16,11 @@ document.querySelector('#agregar_autor').addEventListener('click', function(){
 });
 
 // Crea dinamicamente la tabla con los autores a, representa autores y p, representa paices en las variables declaradas
-for (var a = 0; a < autores.length; a++) {
+for (var a in autores) {
     contenidoTabla += "<tr class='ocultar'>"
         contenidoTabla += `<td>${parseInt(a)+1}</td>`
         contenidoTabla += `<td>${autores[a].nombre}</td>`
-        contenidoTabla += `<td>${autores[a].aperllido}</td>`
+        contenidoTabla += `<td>${autores[a].apellido}</td>`
         contenidoTabla += `<td>${paises[parseInt(autores[a].nacionalidad)-1].nombre}</td>`
         contenidoTabla += `<td>${autores[a].fecha_ingreso}</td>`
         contenidoTabla += `<td id='edit${autores[a].autor_id}' onclick="AutorEditar(${a})">Editar</td>`
@@ -80,7 +80,7 @@ function AutorEditar(_autor) {
             autor = _autor;
         }
     }
-    autor = localStorage.setItem('autor_edit', JSON.stringify(autor));
+    autor = localStorage.setItem('autor_edit', autor);
     window.location.href='/editar_autores.html';
 };
 
