@@ -1,0 +1,33 @@
+extends includes/layout
+
+block content
+    .div_ventana
+        .div_ventana__titulo
+            p Editar libros
+        .div_encabezado
+            h2 Editar libro
+        .div_formulario
+            label(for="txt_libro_titulo") Título:
+            p: input#txt_libro_titulo(type="text", name="txt_libro_titulo")
+
+            p Autor:
+            select#slc_libro_autor(name="slc_libro_autor")
+                option(value="0") Elija un autor
+
+            p Tema:
+            select#slc_libro_tema(name="slc_libro_tema")
+                option(value="0") Elija un tema
+            
+            p: label(for="txt_libro_existencia") Existencia:
+            p: input#txt_libro_existencia(type="text", name="txt_libro_existencia")
+
+            label(for="txt_libro_ubicacion") Ubicación:
+            p: input#txt_libro_ubicacion(type="text", name="txt_libro_ubicacion")
+
+            label(for="txt_libro_fecha") Fecha de ingreso:
+            p: input#txt_libro_fecha(type="text", name="txt_libro_fecha" disabled)
+
+            button#btn_regresar Regresar
+            button#btn_guardar Guardar
+
+    script(src="assets/js/editar_libros.js")

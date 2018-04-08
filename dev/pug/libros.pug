@@ -1,0 +1,14 @@
+extends includes/layout
+
+block content
+    div
+        .nuevo_libro
+            button#agregar_libro Agregar
+        .contenedor.tabla
+        .contenedor.nav
+            button#btn_anterior.ocultar Anterior
+            P Del #[span.inicio] al #[span.final] de #[span.total]
+            //-input#mostrar(type="number", name="mostrar")
+            button#btn_siguiente Siguiente
+
+    script(src="assets/js/libros.js")
