@@ -4,10 +4,7 @@
  */
 
 // Array que almacena los usuarios ingresados
-let administradores = [];
-
-// Array que almacena los libros ingresados
-let libros = [];
+let administradores;
 
 // Array que almacena los departamentos de Guatemala
 let Departamento = [];
@@ -46,6 +43,12 @@ const munis = [
 
 // Toma los elementos para crear un menu dinamico
 let dinamicoMuni =[];
+
+if (localStorage.getItem('administradores')) {
+    administradores = JSON.parse(localStorage.getItem('administradores'));
+} else {
+    administradores = [];
+}
 
 // Variable creada para asignar el ID a los usuarios registrados
 let countIdAdmin = 1;
