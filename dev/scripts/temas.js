@@ -1,18 +1,55 @@
+// Obtiene los temas del local storage para ser impresos en el documento html
 temas = JSON.parse(localStorage.getItem('temas'));
 
+// Alcanza el elemento donde se imprimira la tabla con la informacion
 const tabla =  document.querySelector('.tabla');
-const tabla2 =  document.querySelector('#tabla2');
+// Variable para imprimir la tabla en el interior
 let contenidoTabla = '';
 
-let filas = temas.length;
+/**
+ * mostrarInicio indica cual es el primer elemento a mostrar en la informacion
+ * mostrarFinal indica el ultmio elemento a mostrar visualmente en la tabla
+ * pivote, utilizado para establecer un limite entre el inicio y el final de la informacion
+ * ya que este camiara si el usuario asi lo desea
+ **/
+let mostrarInicio = 0;
+let mostrarFinal = 0
+let pivote = 0;
+
+/**
+ * Debido a que la funcion mostar funciona con el local storage, si los datos estan almacenados
+ * en el local serán obtenidos primero y si no, mostraran los datos por default de 10
+ */
+
+if (localStorage.getItem('mostrarFinal') && localStorage.getItem('pivote')) {
+    mostrarFinal = JSON.parse(localStorage.getItem('mostrarFinal'));
+    pivote = JSON.parse(localStorage.getItem('pivote'));
+} else {
+    mostrarFinal = 10;
+    pivote = 10;
+}
 
 // Objects.keys(objeto) devuelve el numero de propiedades que tiene un objeto, en este caso indico [i], ya que todos los objetos tienen el mismo numero de propiedades
 const llaves = Object.keys(temas[0]);
 
 // Al dar clic debe enviar a la pagina para crear un nuevo tema
-
 document.querySelector('#agregar_tema').addEventListener('click', function(){
     window.location.href='/nuevo_tema.html';
+});
+
+/**
+ * Al presionar el boton mostrar, se genera nuevamente el documento con el numero de
+ * datos solicitados por el usuario, al mismo tiempo se guardadn en localStorage para
+ * cambiar las variables por default
+ **/
+document.querySelector('#btn_show').addEventListener('click', function(){
+    mostrarFinal = document.querySelector('#txt_showRows').value;
+    pivote = document.querySelector('#txt_showRows').value;
+
+    localStorage.setItem('mostrarFinal', mostrarFinal);
+    localStorage.setItem('pivote', pivote);
+
+    window.location.reload();   
 });
 
 // Crea dinamicamente la tabala
@@ -27,17 +64,6 @@ for (var i in temas) {
             contenidoTabla += `<td id='edit${temas[i].tema_id}' onclick="TemaEditar(${i})">Editar</td>`
             contenidoTabla += `<td id='${temas[i].tema_id}' onclick="TemaEliminar(${i})">Eliminar</td>`
     }
-
-    /*var row =  tabla2.insertRow(i);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-
-    cell1.innerHTML = `${temas[i].tema_id}`;
-    cell2.innerHTML = `${temas[i].tema}`;
-    cell3.innerHTML = `${temas[i].fecha_ingreso}`;
-    cell.innerHTML = `${temas[i].tema_id}`;
-    cell.innerHTML = `${temas[i].tema_id}`;*/
 };
 
 // Inserta la tabala en el contenedor
@@ -64,29 +90,23 @@ let imprimirFinal = document.querySelector('.final') ;
 let imprimirTotal = document.querySelector('.total');
 
 //cantidad de elementos a mostrar en la tabla
-let mostrarInicio = 0;
-let mostrarFinal = 10;
-let pivote = 10;
-// por default todos los elementos en la tabla estan ocultos, la siguiente funcion hace que se muestren solo los primeros 10
-for (let i = mostrarInicio; i < tr.length; i++) {
-    if (i <= mostrarFinal) {
-        tr[i].classList.remove('ocultar');
-    }
-    imprimirInicio.innerHTML = `${mostrarInicio+1}`;
-    imprimirFinal.innerHTML = `${mostrarFinal}`;
-    imprimirTotal.innerHTML = `${temas.length}`;
-}
 
+
+// por default todos los elementos en la tabla estan ocultos, la siguiente funcion hace que se muestren solo los primeros 10
+    for (let i = mostrarInicio; i < tr.length; i++) {
+        if (i <= mostrarFinal) {
+            tr[i].classList.remove('ocultar');
+        }
+        imprimirInicio.innerHTML = `${mostrarInicio+1}`;
+        imprimirFinal.innerHTML = `${mostrarFinal}`;
+        imprimirTotal.innerHTML = `${temas.length}`;
+    }
 /* La funcion recibe el indice del elemento a editar, lo almacena en una variable para poder realizar la edicion en la pantalla
 de edicion, dicha variable es almacenada en el localStorage para poder hacer uso de ella*/
 function TemaEditar(_tema) {
     let tema;
-    for (let i in temas) {
-        if (_tema+1 == temas[i].tema_id) {
-            tema = _tema;
-        }
-    }
-    tema = localStorage.setItem('tema_edit', JSON.stringify(tema));
+
+    localStorage.setItem('tema_edit', _tema);
     window.location.replace('/editar_temas.html')
 }
 
