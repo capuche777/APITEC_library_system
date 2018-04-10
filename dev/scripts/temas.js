@@ -113,7 +113,7 @@ function TemaEditar(_tema) {
 // Elimina el tema sobre el cual se da clic en el boton eliminar.
 function TemaEliminar(tema) {
     temas.splice(tema, 1);
-    temas = localStorage.setItem('temas', JSON.stringify(temas));
+    localStorage.setItem('temas', JSON.stringify(temas));
     window.location.reload();
 }
 

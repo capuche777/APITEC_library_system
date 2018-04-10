@@ -7,12 +7,14 @@ block content
         .div_encabezado
             h2 Agregar nuevo tema
         .div_formulario
-            label(for="txt_ingreso_tema") Tema:
-            p: input#txt_ingreso_tema(type="text", name="txt_ingreso_tema")
+            form(action="#")
+                label(for="txt_ingreso_tema") Tema:
+                p: input#txt_ingreso_tema.textos(type="text", name="txt_ingreso_tema", onkeypress="ValidarTextos")
+                .alert
 
-            label(for="txt_ingreso_fecha_tema") Fecha de Ingreso:
-            p: input#txt_ingreso_fecha_tema(type="text", name="txt_ingreso_fecha_tema")
+                label(for="txt_ingreso_fecha_tema") Fecha de Ingreso:
+                p: input#txt_ingreso_fecha_tema(type="text", name="txt_ingreso_fecha_tema" disabled)
         
-        button#btn_ingreso_tema_regresar Regresar
-        button#btn_ingreso_tema_aceptar Aceptar
+            button#btn_ingreso_tema_regresar Regresar
+                button#btn_ingreso_tema_aceptar(type="submit") Guardar
     script(src="assets/js/nuevo_tema.js")
