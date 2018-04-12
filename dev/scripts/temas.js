@@ -34,7 +34,7 @@ const llaves = Object.keys(temas[0]);
 
 // Al dar clic debe enviar a la pagina para crear un nuevo tema
 document.querySelector('#agregar_tema').addEventListener('click', function(){
-    window.location.href='/nuevo_tema.html';
+    window.location.href='nuevo_tema.html';
 });
 
 /**
