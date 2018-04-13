@@ -46,10 +46,14 @@ document.querySelector('#btn_show').addEventListener('click', function(){
     mostrarFinal = document.querySelector('#txt_showRows').value;
     pivote = document.querySelector('#txt_showRows').value;
 
-    localStorage.setItem('mostrarFinal', mostrarFinal);
-    localStorage.setItem('pivote', pivote);
+    if (mostrarFinal <= 0 || mostrarFinal > temas.length) {
+        document.querySelector('.alert').innerHTML = `Por favor ingrese un número entre 1 y ${temas.length}`
+    } else {
+        localStorage.setItem('mostrarFinal', mostrarFinal);
+        localStorage.setItem('pivote', pivote);
 
-    window.location.reload();   
+        window.location.reload();   
+    }
 });
 
 // Crea dinamicamente la tabala
@@ -81,15 +85,13 @@ tabla.innerHTML = `
     </table>
 `;
 
-// Solo se deben mostrar 5 resultados para el ejemplo
+// Solo se deben mostrar 10 resultados para el ejemplo
 const tr = document.getElementsByTagName('TR');
 const anterior = document.querySelector('#anterior');
 const siguiente = document.querySelector('#siguiente');
 let imprimirInicio = document.querySelector('.inicio');
 let imprimirFinal = document.querySelector('.final') ;
 let imprimirTotal = document.querySelector('.total');
-
-//cantidad de elementos a mostrar en la tabla
 
 
 // por default todos los elementos en la tabla estan ocultos, la siguiente funcion hace que se muestren solo los primeros 10
@@ -100,6 +102,7 @@ let imprimirTotal = document.querySelector('.total');
         imprimirInicio.innerHTML = `${mostrarInicio+1}`;
         imprimirFinal.innerHTML = `${mostrarFinal}`;
         imprimirTotal.innerHTML = `${temas.length}`;
+        OcultarBotonera();
     }
 /* La funcion recibe el indice del elemento a editar, lo almacena en una variable para poder realizar la edicion en la pantalla
 de edicion, dicha variable es almacenada en el localStorage para poder hacer uso de ella*/
@@ -124,7 +127,10 @@ el valor de los articulos que se muestran en pantalla
 */
 function OcultarBotonera() {
     for (let i in tr) {
-        if (tr[1].getAttribute('class') == '') {
+        if (tr[1].getAttribute('class') == '' && tr[tr.length-1].getAttribute('class') == '') {
+            anterior.classList.add('ocultar');
+            siguiente.classList.add('ocultar');
+        } else if (tr[1].getAttribute('class') == '') {
             anterior.classList.add('ocultar');
             siguiente.classList.remove('ocultar');
         } else if (tr[tr.length-1].getAttribute('class') == '') {
@@ -157,7 +163,7 @@ anterior.addEventListener('click', function(){
     
     imprimirInicio.innerHTML = `${mostrarInicio+1}`;
     imprimirFinal.innerHTML = `${mostrarFinal}`;
-    imprimirTotal.innerHTML = `${temas.length}`
+    imprimirTotal.innerHTML = `${temas.length}`;
     OcultarBotonera();
 });
 
