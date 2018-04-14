@@ -31,7 +31,7 @@ const dateTopic = document.querySelector('#txt_ingreso_fecha_tema').value = date
 const nuevoTema = document.querySelector('#btn_ingreso_tema_aceptar');
 
 // Monitorea el clic sobre el boton asignado anteriormente
-nuevoTema.addEventListener('click', agregarTema);
+//nuevoTema.addEventListener('click', agregarTema);
 
 // Auto incrementa el ID de los temas
 function incrementarID() {
@@ -42,15 +42,9 @@ function incrementarID() {
     }
 };
 
-// funcion para regresar a la pagina de temas
-document.querySelector('#btn_ingreso_tema_regresar').addEventListener('click', function(){
-    window.location.href='/temas.html';
-});
-
 //Funcion encargada de crear los temas
 function agregarTema() {
-    const topic = document.querySelector('#txt_ingreso_tema').value;
-    
+    const topic = document.querySelector('#txt_ingreso_tema').value;    
 
     const tema = {
         tema_id: topicID,
@@ -67,4 +61,17 @@ function agregarTema() {
 // Funcion encargada de limpiar el formulario
 function limpiarTemaForm() {
     const topic = document.querySelector('#txt_ingreso_tema').value = "";
+}
+
+// Funcion encargada de validar el ingreso de temas
+function ValidarIngreso(){
+    const topic = document.querySelector('#txt_ingreso_tema');
+    if (topic.value != "") {
+        agregarTema();
+        alert('tema agregado correctamente');
+        return true;
+    } else {
+        alert("debe ingresar tema");
+        return false;
+    }
 }

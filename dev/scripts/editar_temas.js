@@ -7,18 +7,25 @@ tema_edit = parseInt(localStorage.getItem('tema_edit'));
 const tema = document.querySelector('#txt_editar_tema').value = temas[tema_edit]['tema'];
 const fecha = document.querySelector('#txt_editar_fecha_tema').value = temas[tema_edit]['fecha_ingreso'];
 
-//selecciona el boton guardar
-var guardar = document.querySelector('#guardar');
-
 // Funcion que guarda los datos editados, solo permite guardar el nombre del tema, el id y la fecha de ingreso son tomados del valor anterior
-guardar.addEventListener('click', function() {
+function Tema_Editado() {
     var tema = {
         tema_id: temas[tema_edit]['tema_id'],
         tema: document.querySelector('#txt_editar_tema').value,
         fecha_ingreso: temas[tema_edit]['fecha_ingreso']
     }
     temas[tema_edit] = tema;
-    localStorage.setItem('temas', JSON.stringify(temas));
-    window.location.replace('/temas.html');
-});
-
+    localStorage.setItem('temas', JSON.stringify(temas));  
+};
+// Funcion encargada de validar el ingreso de temas
+function ValidarIngreso(){
+    const topic = document.querySelector('#txt_editar_tema');
+    if (topic.value != "") {
+        Tema_Editado();
+        alert('El tema ha sido editado')
+        return true;    
+    } else {
+        alert("debe ingresar tema");
+        return false;
+    }
+}

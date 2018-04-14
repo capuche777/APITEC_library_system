@@ -107,17 +107,23 @@ let imprimirTotal = document.querySelector('.total');
 /* La funcion recibe el indice del elemento a editar, lo almacena en una variable para poder realizar la edicion en la pantalla
 de edicion, dicha variable es almacenada en el localStorage para poder hacer uso de ella*/
 function TemaEditar(_tema) {
-    let tema;
-
-    localStorage.setItem('tema_edit', _tema);
-    window.location.replace('/editar_temas.html')
+    let confirmar = confirm('Quieres editar este tema?')
+    if (confirmar) {
+        localStorage.setItem('tema_edit', _tema);
+        window.location.href = 'editar_temas.html';
+    }
 }
 
 // Elimina el tema sobre el cual se da clic en el boton eliminar.
 function TemaEliminar(tema) {
-    temas.splice(tema, 1);
-    localStorage.setItem('temas', JSON.stringify(temas));
-    window.location.reload();
+    let confirmar = confirm('Deseas eliminar el tema');
+    if (confirmar) {
+        temas.splice(tema, 1);
+        localStorage.setItem('temas', JSON.stringify(temas));
+        window.location.reload();
+    } else {
+        alert('No se ha realizado ninguna acción')
+    }
 }
 
 /*

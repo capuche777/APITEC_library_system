@@ -146,15 +146,3 @@ function ValidarEdad(_fecha) {
     else $('#div_autorizacion_menor').hide();
 
 }
-
-/**
- * Validacion de campos vacios
- */
-
-function ValidarTextos() {
-    let textos = document.querySelectorAll('.textos');
-    if (textos == "") {
-        alert('Debe llenar el campo')
-        return false;
-    }
-}
