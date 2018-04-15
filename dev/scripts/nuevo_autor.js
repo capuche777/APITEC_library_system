@@ -11,6 +11,7 @@ if (localStorage.getItem('autores')) {
     AutorIDSum();
 } else {
     autores = [];
+    AutorIDSum();
 }
 
 // Chequear si existe el objeto Paises en localStorage
@@ -97,7 +98,7 @@ function AutorIDSum(){
 const nuevoAutor = document.querySelector('#btn_ingreso_autor_aceptar');
 
 // Monitorea cuando el boton de aceptar es presionado
-nuevoAutor.addEventListener('click', agregarAutor);
+//nuevoAutor.addEventListener('click', agregarAutor);
 
 // Duncion que se ejecuta cuando se presiona el boton Agregar agutor, debe almacenar los datos en local storage
 function agregarAutor(){
@@ -135,6 +136,15 @@ function agregarAutor(){
 function limpiarAutorForm() {
     document.querySelector('#txt_nombre_autor').value = "";
     document.querySelector('#txt_apellido_autor').value = "";
+    document.querySelector('#slc_autor_pais').value = "0"
+    /**
+     * Primero se selecciona el radio por su atributo "name"
+     * posteriormente se recorre con el ciclo "for" para poder
+     * establecer que ninguno de los elementos será seleccionado
+     */
+    let genero = document.getElementsByName('genero');
+    for (var i = 0; i < genero.length; i++)
+        genero[i].checked = false;
     document.querySelector('#txt_autor_fecha_nacimiento').value = "";
     document.querySelector('#txt_autor_fecha_fallecimiento').value = "";
     document.querySelector('#txt_ingreso_fecha_autor').value = dateToday;
@@ -149,6 +159,29 @@ function getPais() {
 // selecciona el boton regresar del usuario
 const regresar = document.querySelector('#btn_ingreso_autor_regresar');
 
-regresar.addEventListener('click', function(){
-    window.location.href='/autores.html';
-});
+/*regresar.addEventListener('click', function(){
+    window.location.href='autores.html';
+});*/
+
+function Validar_Autor() {
+    nombre = document.querySelector('#txt_nombre_autor');
+    apellido = document.querySelector('#txt_apellido_autor');
+    pais = document.querySelector('#slc_autor_pais').value == "0"
+    /**
+     * Primero se selecciona el radio por su atributo "name"
+     * posteriormente se recorre con el ciclo "for" para poder
+     * establecer que ninguno de los elementos será seleccionado
+     */
+    let genero = document.getElementsByName('genero');
+    for (var i = 0; i < genero.length; i++)
+        genero[i].checked = false;
+    nacimiento = document.querySelector('#txt_autor_fecha_nacimiento');
+    muerte = document.querySelector('#txt_autor_fecha_fallecimiento');
+
+    if (nombre.length < 1) {
+        alert("Debes llenar el campo Nombre:");
+    }
+    if (apellido.length < 1) {
+        alert("Debes llenar el campo Apellido");
+    }
+}

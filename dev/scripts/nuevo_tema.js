@@ -9,6 +9,7 @@ if (localStorage.getItem('temas')) {
     incrementarID();
 } else {
     temas = [];
+    incrementarID();
 }
 
 

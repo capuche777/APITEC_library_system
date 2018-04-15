@@ -1,10 +1,10 @@
-// Obtiene los temas del local storage para ser impresos en el documento html
-temas = JSON.parse(localStorage.getItem('temas'));
+let libros = JSON.parse(localStorage.getItem('libros'));
+let autores = JSON.parse(localStorage.getItem('autores'));
+let temas = JSON.parse(localStorage.getItem('temas'));
 
-// Alcanza el elemento donde se imprimira la tabla con la informacion
-const tabla =  document.querySelector('.tabla');
-// Variable para imprimir la tabla en el interior
-let contenidoTabla = '';
+const tabla = document.querySelector('.tabla');
+
+let contenidoTabla = "";
 
 /**
  * mostrarInicio indica cual es el primer elemento a mostrar en la informacion
@@ -29,9 +29,6 @@ if (localStorage.getItem('mostrarFinal') && localStorage.getItem('pivote')) {
     pivote = 10;
 }
 
-// Objects.keys(objeto) devuelve el numero de propiedades que tiene un objeto, en este caso indico [i], ya que todos los objetos tienen el mismo numero de propiedades
-const llaves = Object.keys(temas[0]);
-
 /**
  * Al presionar el boton mostrar, se genera nuevamente el documento con el numero de
  * datos solicitados por el usuario, al mismo tiempo se guardadn en localStorage para
@@ -41,8 +38,8 @@ document.querySelector('#btn_show').addEventListener('click', function(){
     mostrarFinal = document.querySelector('#txt_showRows').value;
     pivote = document.querySelector('#txt_showRows').value;
 
-    if (mostrarFinal <= 0 || mostrarFinal > temas.length) {
-        document.querySelector('.alert').innerHTML = `Por favor ingrese un número entre 1 y ${temas.length}`
+    if (mostrarFinal <= 0 || mostrarFinal > libros.length) {
+        document.querySelector('.alert').innerHTML = `Por favor ingrese un número entre 1 y ${libros.length}`
     } else {
         localStorage.setItem('mostrarFinal', mostrarFinal);
         localStorage.setItem('pivote', pivote);
@@ -51,39 +48,57 @@ document.querySelector('#btn_show').addEventListener('click', function(){
     }
 });
 
-// Crea dinamicamente la tabala
-for (var i in temas) {
-    if (temas[i] == 0) {
-        console.log('tiene vacios');
-    } else {
-        contenidoTabla += "<tr class='ocultar'>"
-            contenidoTabla += `<td>${parseInt(i)+1}</td>`
-            contenidoTabla += `<td>${temas[i].tema}</td>`
-            contenidoTabla += `<td>${temas[i].fecha_ingreso}</td>`
-            contenidoTabla += `<td id='edit${temas[i].tema_id}' onclick="TemaEditar(${i})">Editar</td>`
-            contenidoTabla += `<td id='${temas[i].tema_id}' onclick="TemaEliminar(${i})">Eliminar</td>`
-    }
-};
+/**
+ * i = libros
+ * a = autores
+ * t = temas
+ */
+for (const i in libros) {
+    contenidoTabla += "<tr>"
+        contenidoTabla += `<td>${parseInt(i)+1}</td>`
+        contenidoTabla += `<td>${libros[i].titulo}</td>`
+        let _autor;
+        let _apellido;
+        for (const a in autores) {
+            if (libros[i].autor_id == autores[a].autor_id) {
+                _autor = autores[a].nombre;
+                _apellido = autores[a].apellido;
+            }
+        }
+        contenidoTabla += `<td>${_autor} ${_apellido}</td>`
+        let _tema;
+        for (const t in temas) {
+            if (libros[i].tema_id == temas[t].tema_id) {
+                _tema = temas[t].tema;
+            }
+        }
+        contenidoTabla += `<td>${_tema}</td>`
+        contenidoTabla += `<td>${libros[i].ubicacion}</td>`
+        contenidoTabla += `<td>${libros[i].disponibles}</td>`
+        contenidoTabla += `<td onclick="Libro_Prestar(${i})"><span id="operacion">Prestar</span></td>`
+}
 
-// Inserta la tabala en el contenedor
 tabla.innerHTML = `
     <table border=1>
-        <thead>
-            <th>#</th>
-            <th>Tema</th>
-            <th>Fecha de Ingreso</th>
-            <th colspan=2>Operaciones</th>
-        </thead>
-        <tbody>
-            ${contenidoTabla}
-        </tbody>
+    <thead>
+        <th>#</th>
+        <th>Libro</th>
+        <th>Autor</th>
+        <th>Tema</th>
+        <th>Ubicacion</th>
+        <th>Disp.</th>
+        <th>Operaciones</th>
+    </thead>
+    <tbody>
+        ${contenidoTabla}
+    </tbody>
     </table>
 `;
 
 // Solo se deben mostrar 10 resultados para el ejemplo
 const tr = document.getElementsByTagName('TR');
-const anterior = document.querySelector('#anterior');
-const siguiente = document.querySelector('#siguiente');
+const anterior = document.querySelector('#btn_anterior');
+const siguiente = document.querySelector('#btn_siguiente');
 let imprimirInicio = document.querySelector('.inicio');
 let imprimirFinal = document.querySelector('.final') ;
 let imprimirTotal = document.querySelector('.total');
@@ -96,30 +111,9 @@ let imprimirTotal = document.querySelector('.total');
         }
         imprimirInicio.innerHTML = `${mostrarInicio+1}`;
         imprimirFinal.innerHTML = `${mostrarFinal}`;
-        imprimirTotal.innerHTML = `${temas.length}`;
+        imprimirTotal.innerHTML = `${libros.length}`;
         OcultarBotonera();
     }
-/* La funcion recibe el indice del elemento a editar, lo almacena en una variable para poder realizar la edicion en la pantalla
-de edicion, dicha variable es almacenada en el localStorage para poder hacer uso de ella*/
-function TemaEditar(_tema) {
-    let confirmar = confirm('Quieres editar este tema?')
-    if (confirmar) {
-        localStorage.setItem('tema_edit', _tema);
-        window.location.href = 'editar_temas.html';
-    }
-}
-
-// Elimina el tema sobre el cual se da clic en el boton eliminar.
-function TemaEliminar(tema) {
-    let confirmar = confirm('Deseas eliminar el tema');
-    if (confirmar) {
-        temas.splice(tema, 1);
-        localStorage.setItem('temas', JSON.stringify(temas));
-        window.location.reload();
-    } else {
-        alert('No se ha realizado ninguna acción')
-    }
-}
 
 /*
 La siguiente funcion oculta el boton anterior si el primer elemento no cuenta con la clase ocultar
@@ -137,7 +131,7 @@ function OcultarBotonera() {
         } else if (tr[tr.length-1].getAttribute('class') == '') {
             siguiente.classList.add('ocultar');
             anterior.classList.remove('ocultar');
-            imprimirFinal.innerHTML = `${temas.length}`;
+            imprimirFinal.innerHTML = `${libros.length}`;
         }
     }
 }
@@ -164,7 +158,7 @@ anterior.addEventListener('click', function(){
     
     imprimirInicio.innerHTML = `${mostrarInicio+1}`;
     imprimirFinal.innerHTML = `${mostrarFinal}`;
-    imprimirTotal.innerHTML = `${temas.length}`;
+    imprimirTotal.innerHTML = `${libros.length}`;
     OcultarBotonera();
 });
 
@@ -191,6 +185,18 @@ siguiente.addEventListener('click', function(){
     
     imprimirInicio.innerHTML = `${mostrarInicio+1}`;
     imprimirFinal.innerHTML = `${mostrarFinal}`;
-    imprimirTotal.innerHTML = `${temas.length}`
+    imprimirTotal.innerHTML = `${libros.length}`
     OcultarBotonera();
 });
+
+/**
+ * Funcion a ejecutar cuando el usuario de clic en la opcion prestar
+ */
+function Libro_Prestar(_libro){
+    let confirmar = confirm('Deseas prestar este libro');
+    if (confirmar) {
+        localStorage.setItem('libro_prestar', _libro);
+        //window.location.href= 'prestar.html';
+        console.log(_libro);
+    }
+}

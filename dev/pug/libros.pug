@@ -1,14 +1,41 @@
-extends includes/layout
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Libros
+        link(rel="stylesheet", href="assets/css/style.css")
+    body
+        .container
+            .container--small
+                h2 Biblooteca
+            .container--small
+                ul
+                    li
+                        a(href="#") Libros
+                        a(href="autores.html") Autores
+                        a(href="temas.html") Temas
+                        a(href="prestamos.html") Prestamos
+                        a(href="perfil.html") Perfil
+                        a(href="salir") Salir
+            .contenedor.info
+                h3 Listado general de libros
+                p Buscar por
+                    select#slc_buscar(name="slc_buscar")
+                        option(value="nombre") Nombre
+                        option(value="autor") Autor
+                        option(value="tema") Tema
+                        option(value="ubicacion") Ubicación
+                    input#bus_bucar(name="bus_buscar" type="search")
+            .contenedor.tabla
+            .contenedor.nav
+                p Cuantos elementos desea mostrar?
+                input#txt_showRows(type="number")
+                button#btn_show Mostrar
+                p.alert
+                button#btn_anterior.ocultar Anterior
+                p Del #[span.inicio] al #[span.final] de #[span.total]
+                button#btn_siguiente Siguiente
 
-block content
-    div
-        .nuevo_libro
-            button#agregar_libro Agregar
-        .contenedor.tabla
-        .contenedor.nav
-            button#btn_anterior.ocultar Anterior
-            P Del #[span.inicio] al #[span.final] de #[span.total]
-            //-input#mostrar(type="number", name="mostrar")
-            button#btn_siguiente Siguiente
-
-    script(src="assets/js/libros.js")
+script(src="assets/js/user_libros.js")

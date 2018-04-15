@@ -1,0 +1,21 @@
+include varandmixins
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title
+        link(rel="stylesheet", href="assets/css/style.css")
+    body
+        nav
+            .container
+                ul
+                    li: a(href="/") Registrar Usuario
+                    li: a(href="login.html") Iniciar Sesion
+                    li: a(href="libros.html") Libros
+                    li: a(href="autores.html") Autores
+                    li: a(href="temas.html") Temas
+        .container
+            block content
+    script(src="assets/js/validaciones.js")

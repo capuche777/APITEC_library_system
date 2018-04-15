@@ -3,7 +3,7 @@ extends includes/layout
 block content
     div
         .nuevo_tema
-            button#agregar_tema Agregar
+            button#agregar_tema: a(href="nuevo_tema.html") Agregar
             p Cuantos elementos desea mostrar?
             input#txt_showRows(type="number")
             button#btn_show Mostrar

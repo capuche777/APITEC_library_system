@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Registrar Usuario
+        link(rel="stylesheet", href="assets/css/style.css")
+    body
+        .container.login
+            h2.title Nuevo Usuario
+            p: a(href="index.html") Ya tiene cuenta? Inicie sesión aquí
+        .registro
+            .registro--left
+                p Nombre: #[input#txt_nombre(type="text" onkeypress="return ValidarEntradaLetras(event)")]
+                p Apellido: #[input#txt_apellido(type="text" onkeypress="return ValidarEntradaLetras(event)")]
+                p Direccion: #[input#txt_direccion(type="text")]
+                p Telefono: #[input#txt_telefono(type="text")]
+                p Correo: #[input#txt_correo(type="text")]
+                p Contraseña: #[input#psw_contrasena(type="text")]
+                p Confirme su Contraseña: #[input#psw_contrasena2(type="text")]
+                p Genero
+                p
+                    input#rad_masculino(type="radio", name="genero" value="1")
+                    label(for="rad_masculino") Masculino
+                    input#rad_femenino(type="radio", name="genero" value="0")
+                    label(for="rad_femenino") Femenino
+                p Fecha de Nacimiento: #[input#txt_nacimiento(type="text")]
+                p CUI: #[input#txt_cui(type="text")]
+            .registro--right
+                p Departamento
+                    select#slc_departamento(name="departamento")
+                        option(value="0") Seleccione un departamento
+                p Municipio
+                    select#slc_municipio(name="municipio")
+                        option(value="0") Seleccione un municipio
+                p Zona: #[input#txt_zona(type="text")]
+                p Institucion Educativa: #[input#txt_institucion(type="text")]
+                p Escolaridad
+                    select#slc_escolaridad(name="escoladirad")
+                        option(value="0") Ninguna
+                        option(value="1") Primaria
+                        option(value="2") Secundaria
+                        option(value="3") Diversificado
+                        option(value="4") Universidad
+                        option(value="5") Postgrado
+                        option(value="6") Doctorado
+                //-img(src="", alt="profile-picture")
+                p: a(href="tos.html") Términos y Condiciones de uso
+                input#chk_tos(type="checkbox", name="tos")
+                label(for="#chk_tos") Acepto los términos y condiciones
+                p: button#btn_registro Registrarme
+            
+script(src="assets/js/validaciones.js")
+script(src="assets/js/user_registro.js")
