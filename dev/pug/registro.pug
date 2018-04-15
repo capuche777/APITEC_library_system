@@ -12,23 +12,23 @@ html(lang="en")
             p: a(href="index.html") Ya tiene cuenta? Inicie sesión aquí
         .registro
             .registro--left
-                p Nombre: #[input#txt_nombre(type="text" onkeypress="return ValidarEntradaLetras(event)")]
-                p Apellido: #[input#txt_apellido(type="text" onkeypress="return ValidarEntradaLetras(event)")]
-                p Direccion: #[input#txt_direccion(type="text")]
-                p Telefono: #[input#txt_telefono(type="text")]
-                p Correo: #[input#txt_correo(type="text")]
-                p Contraseña: #[input#psw_contrasena(type="text")]
-                p Confirme su Contraseña: #[input#psw_contrasena2(type="text")]
-                p Genero
+                p Nombre*: #[input#txt_nombre(type="text" onkeypress="return ValidarEntradaLetras(event)")]
+                p Apellido*: #[input#txt_apellido(type="text" onkeypress="return ValidarEntradaLetras(event)")]
+                p Direccion*: #[input#txt_direccion(type="text")]
+                p Telefono*: #[input#txt_telefono(type="text")]
+                p Correo*: #[input#txt_correo(type="text")]
+                p Contraseña*: #[input#psw_contrasena(type="text")]
+                p Confirme su Contraseña*: #[input#psw_contrasena2(type="text")]
+                p Genero*
                 p
                     input#rad_masculino(type="radio", name="genero" value="1")
                     label(for="rad_masculino") Masculino
                     input#rad_femenino(type="radio", name="genero" value="0")
                     label(for="rad_femenino") Femenino
-                p Fecha de Nacimiento: #[input#txt_nacimiento(type="text")]
-                p CUI: #[input#txt_cui(type="text")]
+                p Fecha de Nacimiento*: #[input#txt_nacimiento(type="text")]
+                p CUI*: #[input#txt_cui(type="text")]
             .registro--right
-                p Departamento
+                p Departamento*
                     select#slc_departamento(name="departamento")
                         option(value="0") Seleccione un departamento
                 p Municipio

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Prestar
+        link(rel="stylesheet", href="assets/css/style.css")
+    body
+        .container
+            .container--small
+                h2 Biblooteca
+            .container--small
+                ul
+                    li
+                        a(href="#") Libros
+                        a(href="autores.html") Autores
+                        a(href="temas.html") Temas
+                        a(href="prestamos.html") Prestamos
+                        a(href="perfil.html") Perfil
+                        a(href="salir") Salir
+        .container.info
+            h3 Prestar Libro
+        .container.tabla
+            table(border=1)
+                thead
+                    th Clasificacion
+                    th Libro
+                tbody
+                    tr
+                        td Libro
+                        td.titulo
+                    tr
+                        td Autor
+                        td.autor
+                    tr
+                        td Tema
+                        td.tema
+                    tr
+                        td Ubicacion
+                        td.ubicacion
+                    tr
+                        td Disponibles
+                        td.disponible
+                    tr
+                        td Fecha de Prestamo
+                        td.fecha_prestamo
+                    tr
+                        td Fecha de devolucion
+                        td.fecha_devolucion
+        .container.nav
+            button#btn_regresar Regresar
+            button#btn_prestar Prestar
+
+    script(src="assets/js/user_prestar.js")
