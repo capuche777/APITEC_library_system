@@ -216,6 +216,12 @@ function Validar_Formulario() {
     }
 }
 
+/**
+ * Funcion que envia los usuarios registrados al objeto usuarios,
+ * posteriormente guarda el objeto en localStorage
+ * Ejecuta una suma sobre el ID del usuario para que este no se repita
+ * Limpia el formulario visible por el usuario
+ */
 function Registrar_Usuario(){
     var usuario = {
         usuario_id: usuarioID,
@@ -235,4 +241,30 @@ function Registrar_Usuario(){
     usuarios.push(usuario);
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
     Usuario_ID_Sum();
+    Limpiar_Formulario();
+}
+
+/**
+ * Funcion que se encarga de Limpiar el formulario luego de realizar un registro
+ */
+function Limpiar_Formulario() {
+    nombre.value = "";
+    apellido.value = "";
+    direccion.value = "";
+    telefono.value = "";
+    correo.value = "";
+    pass.value = "";
+    pass2.value = "";
+    genero = document.getElementsByName('genero');
+    for (let i in genero) {
+        genero[i].checked = false;
+    }
+    nacimiento.value = "";
+    cui.value = "";
+    departamento.value = "0";
+    municipio.value = "0";
+    zona.value = "";
+    institucion.value = "";
+    escolaridad.value = "0"
+    tos.checked = false;
 }
