@@ -21,7 +21,7 @@ if (localStorage.getItem('usuarios')) {
 if (localStorage.getItem('sesion')) {
     sesion = localStorage.getItem('sesion');
     if (sesion == 1) {
-        window.location.href = 'libros.html'
+        window.location.href = 'libros.html';
     }
 }
 

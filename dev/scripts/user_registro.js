@@ -1,3 +1,13 @@
+let sesion;
+/**
+ * Chequear si existe sesion activa, si existe automaticamente envia a la pagina de libros, caso contrario
+ * queda en la pantalla de registro
+ */
+if (localStorage.getItem('sesion')) {
+    sesion = localStorage.getItem('sesion');
+}
+
+
 let usuarios; // Variable para almacenar los usuarios creados en el formulario de registro
 let usuarioID = 0; // Variable creada para incrementar el ID de los usuarios conforme se registran
 let Departamento = []; // // Array que almacena los departamentos de Guatemala
@@ -236,7 +246,8 @@ function Registrar_Usuario(){
         municipio: municipio.value,
         zona: zona.value,
         institucion: institucion.value,
-        escolaridad: escolaridad.value
+        escolaridad: escolaridad.value,
+        estado: 1
     }
     usuarios.push(usuario);
     localStorage.setItem('usuarios', JSON.stringify(usuarios));

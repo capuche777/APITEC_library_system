@@ -1,3 +1,15 @@
+let sesion;
+/**
+ * Chequear si existe sesion activa, si existe automaticamente envia a la pagina de libros, caso contrario
+ * queda en la pantalla de registro
+ */
+if (localStorage.getItem('sesion')) {
+    sesion = localStorage.getItem('sesion');
+}
+if (sesion != 1) {
+    window.location.href = '/';
+}
+
 let libros = JSON.parse(localStorage.getItem('libros'));
 let autores = JSON.parse(localStorage.getItem('autores'));
 let temas = JSON.parse(localStorage.getItem('temas'));
@@ -20,7 +32,6 @@ let pivote = 0;
  * Debido a que la funcion mostar funciona con el local storage, si los datos estan almacenados
  * en el local serán obtenidos primero y si no, mostraran los datos por default de 10
  */
-
 if (localStorage.getItem('mostrarFinal') && localStorage.getItem('pivote')) {
     mostrarFinal = JSON.parse(localStorage.getItem('mostrarFinal'));
     pivote = JSON.parse(localStorage.getItem('pivote'));
@@ -199,4 +210,12 @@ function Libro_Prestar(_libro){
         //window.location.href= 'prestar.html';
         console.log(_libro);
     }
+}
+
+cerrar =  document.querySelector('#salir');
+cerrar.addEventListener('click', Cerrar_Sesion);
+
+function Cerrar_Sesion() {
+    localStorage.setItem('sesion', 0)
+    window.location.reload();
 }
