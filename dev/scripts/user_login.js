@@ -50,6 +50,7 @@ function Validar_Login() {
                 if (email.value == usuarios[i]['correo']
                 && pass.value == usuarios[i]['clave']) {
                     localStorage.setItem('sesion', 1);
+                    localStorage.setItem('logged_user', i)
                 }
             }
             if (localStorage.getItem('sesion')) {

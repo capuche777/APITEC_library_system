@@ -207,8 +207,7 @@ function Libro_Prestar(_libro){
     let confirmar = confirm('Deseas prestar este libro');
     if (confirmar) {
         localStorage.setItem('libro_prestar', _libro);
-        //window.location.href= 'prestar.html';
-        console.log(_libro);
+        window.location.href= 'prestar.html';
     }
 }
 
@@ -216,6 +215,7 @@ cerrar =  document.querySelector('#salir');
 cerrar.addEventListener('click', Cerrar_Sesion);
 
 function Cerrar_Sesion() {
-    localStorage.setItem('sesion', 0)
+    localStorage.setItem('sesion', 0);
+    localStorage.removeItem('logged_user');
     window.location.reload();
 }
