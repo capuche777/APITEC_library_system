@@ -1,63 +1,6 @@
-extends includes/layout
+extends ../includes/layout
 
 block content
     .div_ventana
         .div_ventana__titulo
-            p #{title}
-        .div_encabezado
-            h2 Nuevo Usuario
-            p: a(href="#") Ya tienes cuenta? Inicie sesion aqui
-        .div_formulario
-            .div_formulario--izquierda
-                label(for="txt_nombres") Nombre(s) #[br]
-                p: input#txt_nombres(type="text" placeholder="Ingrese nombre(s)")
-                
-                label(for="txt_apellidos") Apellido(s) #[br]
-                p: input#txt_apellidos(type="text" placeholder="Ingrese apellido(s)")
-                
-                label(for="#txt_direccion") Direccion #[br]
-                p: input#txt_direccion(type="text" placeholder="Ingrese dirección")
-                
-                label(for="tel_telefono") Teléfono #[br]
-                p: input#tel_telefono(type="tel" placeholder="Ingrese número de teléfono")
-                
-                label(for="mail_correo") Correo #[br]
-                p: input#mail_correo(type="email" placeholder="Ingrese correo electrónico")
-                
-                label(for="pwd_contrasenia") Contraseña #[br]
-                p: input#pass_contrasenia(type="password" placeholder="Ingrese contraseña")
-                
-                label(for="pwd_contrasenia2") Confirme su contraseña #[br]
-                p: input#pass_contrasenia2(type="password" placeholder="Confirme contraseña")
-                
-                p Genero
-                input(type="radio", name="genero" value="1" id="rad_masculino")
-                label(for="rad_masculino") Masculino #[br]
-                input(type="radio", name="genero" value="0" id="rad_femenino")
-                label(for="rad_femenino") Femenino
-            
-            .div_formulario--derecha
-                label(for="txt_nac") Fecha de nacimiento #[br]
-                p: input#txt_nac(type="text", name="txt_nac")
-
-                p CUI
-                p: input#txt_cui(type="text" placeholder="Ingrese CUI")
-                
-                p Departamento
-                select#depto(name="depto")
-                    option(value="no") Selecciona un departamento
-                
-                select#mncipio(name="mncipio")
-                    option(value="no") Selecciona un municipio
-                
-                p Tus padres, tutores y/o protutores tienen conocimiento del uso y autorización la navegación y utilización de los servicios
-                input#rad_auth(type="radio", name="rad_auth" value='1')
-                label(for="rad_auth") Sí
-                
-                p#tos: a(href="/tos.html") Terminos y condiciones de uso
-                input#accept(type="checkbox", name="accept" value="accept")
-                label(for="accept") Acepto los terminos y condiciones
-
-                button#btn_enviar(type="submit") Enviar
-
-    script(src="assets/js/registrarUsuario.js")
+            h1 Login

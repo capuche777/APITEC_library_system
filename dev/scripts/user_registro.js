@@ -212,12 +212,12 @@ function Validar_Formulario() {
         && municipio.value > 0
         && zona.value != "") {
             if (pass.value != pass2.value) {
-                alert('las contraseñas no coinciden')
+                alert('las contraseñas no coinciden');
             } else if (escolaridad.value > 0
                         && institucion.value == "") {
-                alert('Debe ingresar Institucion Educativa')
+                alert('Debe ingresar Institucion Educativa');
             } else if (tos.checked == false) {
-                alert('Debe aceptar los términos y condiciones')
+                alert('Debe aceptar los términos y condiciones');
             } else {
                 Registrar_Usuario();
             }

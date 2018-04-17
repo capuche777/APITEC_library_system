@@ -14,6 +14,11 @@ gulp.task('pug', function() {
         pretty: true
     }))
     .pipe(gulp.dest('./dist'))
+    gulp.src('./dev/pug/admin/*.pug')
+    .pipe(pug({
+        pretty: true
+    }))
+    .pipe(gulp.dest('./dist/admin'))
     .pipe(browserSync.stream())
 });
 
@@ -36,7 +41,7 @@ gulp.task('images', function () {
 });
 
 gulp.task('copy', function () {
-    return gulp.src('dev/scripts/*.js')
+    return gulp.src('dev/scripts/*/*.js')
         .pipe(gulp.dest('dist/assets/js'))
         .pipe(browserSync.stream())
 })

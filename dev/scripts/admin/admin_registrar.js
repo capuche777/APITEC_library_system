@@ -1,6 +1,5 @@
 /*
  *Las siguientes variables son necesarias para la creacion de usuarios 
- * 
  */
 
 // Array que almacena los usuarios ingresados
@@ -49,6 +48,18 @@ if (localStorage.getItem('administradores')) {
 } else {
     administradores = [];
 }
+
+const nombre = document.querySelector('#txt_nombres');
+const apellido = document.querySelector('#txt_apellidos');
+const direccion = document.querySelector('#txt_direccion');
+const telefono = document.querySelector('#tel_telefono');
+const correo = document.querySelector('#mail_correo');
+const pass = document.querySelector('#pass_contrasenia');
+const pass2 = document.querySelector('#pass_contrasenia2');
+let genero = document.getElementsByName('genero');
+const nacimiento = document.querySelector('#txt_nac');
+const cui = document.querySelector('#txt_cui');
+const auth = document.querySelector('#rad_auth')
 
 // Variable creada para asignar el ID a los usuarios registrados
 let countIdAdmin = 1;
@@ -122,7 +133,7 @@ function genArray(){
             dinamicoMuni = [];
             // Selecciona el Select para realizar la limpieza y por ultimo limpia el array
             const _select = document.querySelector('#mncipio');
-            _select.innerHTML = ' ';
+            _select.innerHTML = '<option value="0">Seleccione un municipio</option>';
         }
     }
     limpiarSelect();
@@ -161,39 +172,55 @@ function getMncipio() {
     choosenMncipio = Munseleccionado;
 }
 //Encargado de obtener el clic del boton enviar del formulario y llamar a la fucion para agregar usuarios
-enviar.addEventListener('click', agregarAdmin);
+enviar.addEventListener('click', Validar_Formulario);
 
-//Funcion encargada de agregar los usuarios a los objetos
-function agregarAdmin(){
-
-    const nombre = document.querySelector('#txt_nombres').value;
-    const apellido = document.querySelector('#txt_apellidos').value;
-    const direccion = document.querySelector('#txt_direccion').value;
-    const telefono = document.querySelector('#tel_telefono').value;
-    const correo = document.querySelector('#mail_correo').value;
-    const password = document.querySelector('#pass_contrasenia').value;
-    let genero = document.getElementsByName('genero');
-    // Recorre los select de genero
+/**
+ * La siguiente funcion toma los datos almacenados en el formulario
+ * de registro y los compara para saber que no quedan datos vacios
+ */
+function Validar_Formulario() {
+    // Recorre los radio de genero
     for (var i = 0; i < genero.length; i++){
         if (genero[i].checked) {
             genero = genero[i].value;
         }
     }
-    const nac = document.querySelector('#txt_nac').value;
-    const cui = document.querySelector('#txt_cui').value;
-    // Para validacion, pendiente let auth = document.querySelector('#rad_auth');
+    if (nombre.value != ""
+        && apellido.value != ""
+        && direccion.value != ""
+        && telefono.value != ""
+        && correo.value != ""
+        && pass.value != ""
+        && genero >= 0
+        && nacimiento.value != ""
+        && cui.value != ""
+        && choosenDpto > 0
+        && choosenMncipio > 0) {
+            if (pass.value != pass2.value) {
+                alert('Las contraseñas no coinciden');
+            } else if (chk_tos.cheked == false) {
+                alert('Debes aceptar los teminos y condiciones')
+            } else {
+                agregarAdmin();
+            }
+    } else {
+        alert('Debe llenar todos los campos')
+    }
+}
 
+//Funcion encargada de agregar los usuarios a los objetos
+function agregarAdmin(){
     const admin = {
         administrador_id: countIdAdmin,
-        nombre: nombre,
-        apellido: apellido,
-        direccion: direccion,
-        telefono: telefono,
-        correo: correo,
-        password: password,
+        nombre: nombre.value,
+        apellido: apellido.value,
+        direccion: direccion.value,
+        telefono: telefono.value,
+        correo: correo.value,
+        password: pass.value,
         genero: genero,
-        nacimiento: nac,
-        cui: cui,
+        nacimiento: nacimiento.value,
+        cui: cui.value,
         departamento: choosenDpto,
         municipio: choosenMncipio
     }
@@ -206,10 +233,24 @@ function agregarAdmin(){
 
 // Re inicia los valores del formulario de registro de Administradores
 function limpiarAdmin() {
-    document.querySelector('#txt_nombres').value = "";
-    document.querySelector('#txt_apellidos').value = "";
-    document.querySelector('#txt_direccion').value = "";
-    document.querySelector('#tel_telefono').value = "";
-    document.querySelector('#mail_correo').value = "";
-    document.querySelector('#pass_contrasenia').value = "";
+    nombre.value = "";
+    apellido.value = "";
+    direccion.value = "";
+    telefono.value = "";
+    correo.value = "";
+    pass.value = "";
+    pass2.value = "";
+    genero = document.getElementsByName('genero');
+    for (let i in genero) {
+        genero[i].checked = false;
+    }
+    nacimiento.value = "";
+    cui.value = "";
+    slcDepto.value = "0";
+    slcMncipio.value = "0";
 }
+
+/**
+ * Validar que todos los campos de registro esten llenos
+ */
+
