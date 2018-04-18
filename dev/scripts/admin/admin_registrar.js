@@ -5,6 +5,20 @@
 // Array que almacena los usuarios ingresados
 let administradores;
 
+// Variable creada para asignar el ID a los usuarios registrados
+let countIdAdmin = 0;
+
+/**
+ * Chequear si existe el objeto administradores
+ */
+if (localStorage.getItem('administradores')) {
+    administradores = JSON.parse(localStorage.getItem('administradores'));
+    IncrementarID();
+} else {
+    administradores = [];
+    IncrementarID();
+}
+
 // Array que almacena los departamentos de Guatemala
 let Departamento = [];
 
@@ -43,12 +57,6 @@ const munis = [
 // Toma los elementos para crear un menu dinamico
 let dinamicoMuni =[];
 
-if (localStorage.getItem('administradores')) {
-    administradores = JSON.parse(localStorage.getItem('administradores'));
-} else {
-    administradores = [];
-}
-
 const nombre = document.querySelector('#txt_nombres');
 const apellido = document.querySelector('#txt_apellidos');
 const direccion = document.querySelector('#txt_direccion');
@@ -59,10 +67,10 @@ const pass2 = document.querySelector('#pass_contrasenia2');
 let genero = document.getElementsByName('genero');
 const nacimiento = document.querySelector('#txt_nac');
 const cui = document.querySelector('#txt_cui');
-const auth = document.querySelector('#rad_auth')
+const auth = document.querySelector('#rad_auth');
+const tos =  document.querySelector('#chk_tos');
 
-// Variable creada para asignar el ID a los usuarios registrados
-let countIdAdmin = 1;
+
 
 // variable que asigna el departamento a los usuarios registrados
 let choosenDpto = undefined;
@@ -198,7 +206,7 @@ function Validar_Formulario() {
         && choosenMncipio > 0) {
             if (pass.value != pass2.value) {
                 alert('Las contraseñas no coinciden');
-            } else if (chk_tos.cheked == false) {
+            } else if (tos.cheked == false) {
                 alert('Debes aceptar los teminos y condiciones')
             } else {
                 agregarAdmin();
@@ -224,10 +232,14 @@ function agregarAdmin(){
         departamento: choosenDpto,
         municipio: choosenMncipio
     }
-
     administradores.push(admin);
-    countIdAdmin = countIdAdmin+1;
+    localStorage.setItem('administradores', JSON.stringify(administradores));
+    IncrementarID();
     limpiarAdmin();
+}
+
+function IncrementarID() {
+    administradores.length > 0 ? countIdAdmin = administradores[administradores.length - 1]['administrador_id']+1 : countIdAdmin = 1;
 }
 
 
@@ -248,9 +260,5 @@ function limpiarAdmin() {
     cui.value = "";
     slcDepto.value = "0";
     slcMncipio.value = "0";
+    tos.checked = false;
 }
-
-/**
- * Validar que todos los campos de registro esten llenos
- */
-
