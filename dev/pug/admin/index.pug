@@ -1,6 +1,19 @@
-extends ../includes/layout
-
-block content
-    .div_ventana
-        .div_ventana__titulo
-            h1 Login
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Login || Library System
+        link(rel="stylesheet", href="../assets/css/style.css")
+    body
+        .form
+            header
+                h4 Iniciar sesion como administrador
+            section.inputs
+                p: input#txt_email(type="text", name="txt_email" placeholder="Ingresa tu correo")
+                p: input#pas_password(type="password", name="pas_password" placeholder="Ingresa tu contraseña")
+                button#btn_ingresar Ingresar
+            section.nuevo_usuario
+                p: a(href="registrar.html") No Tienes Usuario?
+        script(src="../assets/js/admin/admin_login.js")
