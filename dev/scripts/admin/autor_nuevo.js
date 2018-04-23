@@ -118,7 +118,7 @@ let Validar_Autor = () => {
 
     if (nombre.value != ""
         && apellido.value != ""
-        && nacionalidad > 0
+        && choosenPais > 0
         && genero >= 0
         && nacimiento != "") {
         Agregar_Autor();
@@ -141,13 +141,13 @@ function Agregar_Autor(){
     }
 
     var autor = {
-        autor_id: autores.length+1,
-        nombre: autorNombre,
-        apellido: autorApellido,
-        nacionalidad: autorNac,
+        autor_id: autorID,
+        nombre: nombre.value,
+        apellido: apellido.value,
+        nacionalidad: choosenPais,
         genero: genero,
-        nacimiento: autorBirth,
-        fallecimiento: autorDeath,
+        nacimiento: nacimiento.value,
+        fallecimiento: muerte.value,
         fecha_ingreso: autorIngresoFec
     }
 
@@ -159,19 +159,19 @@ function Agregar_Autor(){
 
 //funcion encargada de limpiar el formulario de autores
 function limpiarAutorForm() {
-    document.querySelector('#txt_nombre_autor').value = "";
-    document.querySelector('#txt_apellido_autor').value = "";
+    nombre.value = "";
+    apellido.value = "";
     document.querySelector('#slc_autor_pais').value = "0"
     /**
      * Primero se selecciona el radio por su atributo "name"
      * posteriormente se recorre con el ciclo "for" para poder
      * establecer que ninguno de los elementos será seleccionado
      */
-    let genero = document.getElementsByName('genero');
+    genero = document.getElementsByName('genero');
     for (var i = 0; i < genero.length; i++)
         genero[i].checked = false;
-    document.querySelector('#txt_autor_fecha_nacimiento').value = "";
-    document.querySelector('#txt_autor_fecha_fallecimiento').value = "";
+    nacimiento.value = "";
+    muerte.value = "";
     document.querySelector('#txt_ingreso_fecha_autor').value = dateToday;
 }
 
