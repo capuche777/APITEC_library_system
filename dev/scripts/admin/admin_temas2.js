@@ -7,10 +7,13 @@ const tabla = document.querySelector('#temas'); // Encuentra el elemento <table>
 let inicioTabla = 0;
 let finalTabla = 0;
 let pivote = 0;
+let cell;
 
 if (localStorage.getItem('finalTabla') && localStorage.getItem('pivote')) {
     finalTabla = parseInt(localStorage.getItem('finalTabla'));
     pivote = parseInt(localStorage.getItem('pivote'));
+} else if (temas.length < 10) {
+    finalTabla = temas.length;
 } else {
     finalTabla = 10;
     pivote = 10;
@@ -23,8 +26,16 @@ if (localStorage.getItem('finalTabla') && localStorage.getItem('pivote')) {
  * Ambos parametros serán definidos por inicioTabla y finalTabla
  */
 const Crear_Tablas = (i, f) => {
-    for (let i = inicioTabla; i < finalTabla; i++) {
-        let row = tabla.insertRow(i);
+    for (let j = inicioTabla; j < finalTabla; j++) {    
+// Ciclo para recorrer el objeto temas
+        for (let t in temas) {
+            let row = tabla.insertRow(j);
+
+            let cell1 = row.insertCell(j);
+            let cell2 = row.insertCell(j);
+            cell1.innerHTML = `${t}`;
+            cell2.innerHTML = `${temas[t]['tema']}`
+        }
     }
 }
 
