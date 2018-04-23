@@ -12,7 +12,7 @@ let contenidoTabla = '';
 
 // Al dar clic en el boton Agregar este debe reenviar a una nueva ventana para agregar nuevos autores
 document.querySelector('#agregar_autor').addEventListener('click', function(){
-    window.location.href='/nuevo_autor.html';
+    window.location.href='/admin/nuevo_autor.html';
 });
 
 // Crea dinamicamente la tabla con los autores a, representa autores y p, representa paices en las variables declaradas

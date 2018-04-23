@@ -44,7 +44,7 @@ const mundo = ["Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antig
 "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue"];
 
 // Se ha declarado para obtener el valor seleccionado del usuario
-let choosenPais = undefined;
+let choosenPais;
 
 const slcPais = document.querySelector('#slc_autor_pais');
 slcPais.addEventListener('change', getPais)
