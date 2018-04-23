@@ -57,6 +57,9 @@ const munis = [
 // Toma los elementos para crear un menu dinamico
 let dinamicoMuni =[];
 
+/**
+ * Variables declaradas para ser usadas globalmente
+ */
 const nombre = document.querySelector('#txt_nombres');
 const apellido = document.querySelector('#txt_apellidos');
 const direccion = document.querySelector('#txt_direccion');

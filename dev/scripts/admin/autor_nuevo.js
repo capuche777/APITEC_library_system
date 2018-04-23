@@ -95,25 +95,50 @@ function AutorIDSum(){
 }
 
 //selecciona el boton de aceptar para el ingreso de autores
-const nuevoAutor = document.querySelector('#btn_ingreso_autor_aceptar');
 
-// Monitorea cuando el boton de aceptar es presionado
-//nuevoAutor.addEventListener('click', agregarAutor);
+
+/**
+ * Variables declaradas para ser usadas globalmente
+ */
+const nombre = document.querySelector('#txt_nombre_autor');
+const apellido = document.querySelector('#txt_apellido_autor');
+let nacionalidad = choosenPais;
+let genero = document.getElementsByName('genero');
+const nacimiento = document.querySelector('#txt_autor_fecha_nacimiento');
+const muerte = document.querySelector('#txt_autor_fecha_fallecimiento');
+
+// Funcion creda para validar el ingreso de autores
+let Validar_Autor = () => {
+    //Recorre los radio de genero para asignar un valor
+    for (var i = 0; i < genero.length; i++) {
+        if (genero[i].checked) {
+            genero = genero[i].value;
+        }
+    }
+
+    if (nombre.value != ""
+        && apellido.value != ""
+        && nacionalidad > 0
+        && genero >= 0
+        && nacimiento != "") {
+        Agregar_Autor();
+    } else {
+        alert('Debe llenar todos los campos');
+    }
+}
+
+// Obtiene el cliec en el boton aceptar
+document.querySelector('#btn_aceptar').addEventListener('click', Validar_Autor);
 
 // Duncion que se ejecuta cuando se presiona el boton Agregar agutor, debe almacenar los datos en local storage
-function agregarAutor(){
-    const autorNombre = document.querySelector('#txt_nombre_autor').value;
-    const autorApellido = document.querySelector('#txt_apellido_autor').value;
-    let autorNac = choosenPais;
-    let genero = document.getElementsByName('genero');
+function Agregar_Autor(){
+    genero = document.getElementsByName('genero');
     // Recorre los select de genero
     for (var i = 0; i < genero.length; i++){
         if (genero[i].checked) {
             genero = genero[i].value;
         }
     }
-    const autorBirth = document.querySelector('#txt_autor_fecha_nacimiento').value;
-    const autorDeath = document.querySelector('#txt_autor_fecha_fallecimiento').value;
 
     var autor = {
         autor_id: autores.length+1,
@@ -162,26 +187,3 @@ const regresar = document.querySelector('#btn_ingreso_autor_regresar');
 /*regresar.addEventListener('click', function(){
     window.location.href='autores.html';
 });*/
-
-function Validar_Autor() {
-    nombre = document.querySelector('#txt_nombre_autor');
-    apellido = document.querySelector('#txt_apellido_autor');
-    pais = document.querySelector('#slc_autor_pais').value == "0"
-    /**
-     * Primero se selecciona el radio por su atributo "name"
-     * posteriormente se recorre con el ciclo "for" para poder
-     * establecer que ninguno de los elementos será seleccionado
-     */
-    let genero = document.getElementsByName('genero');
-    for (var i = 0; i < genero.length; i++)
-        genero[i].checked = false;
-    nacimiento = document.querySelector('#txt_autor_fecha_nacimiento');
-    muerte = document.querySelector('#txt_autor_fecha_fallecimiento');
-
-    if (nombre.length < 1) {
-        alert("Debes llenar el campo Nombre:");
-    }
-    if (apellido.length < 1) {
-        alert("Debes llenar el campo Apellido");
-    }
-}
