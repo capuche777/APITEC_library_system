@@ -2,8 +2,8 @@
 let autores;
 // Array que almacena los objetos de los paices para poder trabajar con ellos
 let paises;
-// Variable para definir el ID del Autor
-let autorID = 0;
+
+let autorID = 0; // Variable para definir el ID del Autor
 
 // Chequear si existe autores en localStorage
 if (localStorage.getItem('autores')) {
@@ -21,27 +21,29 @@ if (localStorage.getItem('paises')) {
     paises = [];
 }
 
-//Array que contiene los paices del mundo para ser insertados en el select
-const mundo = ["Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia",
-"Argentina", "Armenia", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin", "Bélgica", "Belice",
-"Benín", "Bielorrusia", "Birmania", "Bolivia", "Bosnia y Herzegovina", "Botsuana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso",
-"Burundi", "Bután", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Catar", "Chad", "Chile", "China", "Chipre", "Ciudad del Vaticano",
-"Colombia", "Comoras", "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica", "Croacia", "Cuba", "Dinamarca",
-"Dominica", "Ecuador", "Egipto", "El Salvador", "Emiratos Árabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia", "España",
-"Estados Unidos", "Estonia", "Etiopía", "Filipinas", "Finlandia", "Fiyi", "Francia", "Gabón", "Gambia", "Georgia", "Ghana",
-"Granada", "Grecia", "Guatemala", "Guyana", "Guinea", "Guinea ecuatorial", "Guinea-Bisáu", "Haití", "Honduras", "Hungría",
-"India", "Indonesia", "Irak", "Irán", "Irlanda", "Islandia", "Islas Marshall", "Islas Salomón", "Israel", "Italia", "Jamaica",
-"Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati", "Kuwait", "Laos", "Lesoto", "Letonia", "Líbano", "Liberia",
-"Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Madagascar", "Malasia", "Malaui", "Maldivas", "Malí", "Malta", "Marruecos",
-"Mauricio", "Mauritania", "México", "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique", "Namibia",
-"Nauru", "Nepal", "Nicaragua", "Níger", "Nigeria", "Noruega", "Nueva Zelanda", "Omán", "Países Bajos", "Pakistán", "Palaos",
-"Panamá", "Papúa Nueva Guinea", "Paraguay", "Perú", "Polonia", "Portugal", "Reino Unido", "República Centroafricana", "República Checa",
-"República de Macedonia", "República del Congo", "República Democrática del Congo", "República Dominicana", "República Sudafricana",
-"Ruanda", "Rumanía", "Rusia", "Samoa", "San Cristóbal y Nieves", "San Marino", "San Vicente y las Granadinas", "Santa Lucía",
-"Santo Tomé y Príncipe", "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", "Somalia", "Sri Lanka", "Suazilandia",
-"Sudán", "Sudán del Sur", "Suecia", "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistán", "Timor Oriental", "Togo", "Tonga",
-"Trinidad y Tobago", "Túnez", "Turkmenistán", "Turquía", "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu",
-"Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue"];
+// Array que contiene los paices del mundo para ser insertados en el select
+const mundo = [
+    'Afganistán', 'Albania', 'Alemania', 'Andorra', 'Angola', 'Antigua y Barbuda', 'Arabia Saudita', 'Argelia',
+    'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaiyán', 'Bahamas', 'Bangladés', 'Barbados', 'Baréin', 'Bélgica', 'Belice',
+    'Benín', 'Bielorrusia', 'Birmania', 'Bolivia', 'Bosnia y Herzegovina', 'Botsuana', 'Brasil', 'Brunéi', 'Bulgaria', 'Burkina Faso',
+    'Burundi', 'Bután', 'Cabo Verde', 'Camboya', 'Camerún', 'Canadá', 'Catar', 'Chad', 'Chile', 'China', 'Chipre', 'Ciudad del Vaticano',
+    'Colombia', 'Comoras', 'Corea del Norte', 'Corea del Sur', 'Costa de Marfil', 'Costa Rica', 'Croacia', 'Cuba', 'Dinamarca',
+    'Dominica', 'Ecuador', 'Egipto', 'El Salvador', 'Emiratos Árabes Unidos', 'Eritrea', 'Eslovaquia', 'Eslovenia', 'España',
+    'Estados Unidos', 'Estonia', 'Etiopía', 'Filipinas', 'Finlandia', 'Fiyi', 'Francia', 'Gabón', 'Gambia', 'Georgia', 'Ghana',
+    'Granada', 'Grecia', 'Guatemala', 'Guyana', 'Guinea', 'Guinea ecuatorial', 'Guinea-Bisáu', 'Haití', 'Honduras', 'Hungría',
+    'India', 'Indonesia', 'Irak', 'Irán', 'Irlanda', 'Islandia', 'Islas Marshall', 'Islas Salomón', 'Israel', 'Italia', 'Jamaica',
+    'Japón', 'Jordania', 'Kazajistán', 'Kenia', 'Kirguistán', 'Kiribati', 'Kuwait', 'Laos', 'Lesoto', 'Letonia', 'Líbano', 'Liberia',
+    'Libia', 'Liechtenstein', 'Lituania', 'Luxemburgo', 'Madagascar', 'Malasia', 'Malaui', 'Maldivas', 'Malí', 'Malta', 'Marruecos',
+    'Mauricio', 'Mauritania', 'México', 'Micronesia', 'Moldavia', 'Mónaco', 'Mongolia', 'Montenegro', 'Mozambique', 'Namibia',
+    'Nauru', 'Nepal', 'Nicaragua', 'Níger', 'Nigeria', 'Noruega', 'Nueva Zelanda', 'Omán', 'Países Bajos', 'Pakistán', 'Palaos',
+    'Panamá', 'Papúa Nueva Guinea', 'Paraguay', 'Perú', 'Polonia', 'Portugal', 'Reino Unido', 'República Centroafricana', 'República Checa',
+    'República de Macedonia', 'República del Congo', 'República Democrática del Congo', 'República Dominicana', 'República Sudafricana',
+    'Ruanda', 'Rumanía', 'Rusia', 'Samoa', 'San Cristóbal y Nieves', 'San Marino', 'San Vicente y las Granadinas', 'Santa Lucía',
+    'Santo Tomé y Príncipe', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leona', 'Singapur', 'Siria', 'Somalia', 'Sri Lanka', 'Suazilandia',
+    'Sudán', 'Sudán del Sur', 'Suecia', 'Suiza', 'Surinam', 'Tailandia', 'Tanzania', 'Tayikistán', 'Timor Oriental', 'Togo', 'Tonga',
+    'Trinidad y Tobago', 'Túnez', 'Turkmenistán', 'Turquía', 'Tuvalu', 'Ucrania', 'Uganda', 'Uruguay', 'Uzbekistán', 'Vanuatu',
+    'Venezuela', 'Vietnam', 'Yemen', 'Yibuti', 'Zambia', 'Zimbabue'
+];
 
 // Se ha declarado para obtener el valor seleccionado del usuario
 let choosenPais;
@@ -51,9 +53,9 @@ slcPais.addEventListener('change', getPais)
 // Funcion para crear objeto y select de paices del mundo
 function crearPaises(el, i, arr) {
 
-    var pais = {
-         pais_id: i+1,
-         nombre: el
+    const pais = {
+        pais_id: i+1,
+        nombre: el
     }
     paises.push(pais);
     // coloca el objeto paises en el local storage
@@ -86,15 +88,15 @@ const dateToday = `${day}/${month+1}/${year}`;
 const autorIngresoFec = document.querySelector('#txt_ingreso_fecha_autor').value = dateToday;
 
 // Funcion para autor Incrementar el ID de los autores
-function AutorIDSum(){
+function AutorIDSum() {
     if (autores.length > 0) {
-        autorID = autores[autores.length-1].autor_id+1;
+        autorID = autores[autores.length - 1].autor_id + 1;
     } else {
         autorID = 1;
     }
 }
 
-//selecciona el boton de aceptar para el ingreso de autores
+// selecciona el boton de aceptar para el ingreso de autores
 
 
 /**
@@ -116,11 +118,11 @@ let Validar_Autor = () => {
         }
     }
 
-    if (nombre.value != ""
-        && apellido.value != ""
+    if (nombre.value != ''
+        && apellido.value != ''
         && choosenPais > 0
         && genero >= 0
-        && nacimiento != "") {
+        && nacimiento != '') {
         Agregar_Autor();
     } else {
         alert('Debe llenar todos los campos');
@@ -159,9 +161,9 @@ function Agregar_Autor(){
 
 //funcion encargada de limpiar el formulario de autores
 function limpiarAutorForm() {
-    nombre.value = "";
-    apellido.value = "";
-    document.querySelector('#slc_autor_pais').value = "0"
+    nombre.value = '';
+    apellido.value = '';
+    document.querySelector('#slc_autor_pais').value = '0'
     /**
      * Primero se selecciona el radio por su atributo "name"
      * posteriormente se recorre con el ciclo "for" para poder
@@ -170,8 +172,8 @@ function limpiarAutorForm() {
     genero = document.getElementsByName('genero');
     for (var i = 0; i < genero.length; i++)
         genero[i].checked = false;
-    nacimiento.value = "";
-    muerte.value = "";
+    nacimiento.value = '';
+    muerte.value = '';
     document.querySelector('#txt_ingreso_fecha_autor').value = dateToday;
 }
 

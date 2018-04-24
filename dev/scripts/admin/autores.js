@@ -1,21 +1,49 @@
-//llama el objeto autores del localStorage, necesario para la creacion de la tabla
-autores = JSON.parse(localStorage.getItem('autores'));
+let autores = JSON.parse(localStorage.getItem('autores')); //llama el objeto autores del localStorage, necesario para la creacion de la tabla
+let paises = JSON.parse(localStorage.getItem('paises')); //llama el objeto paises del localStorage, necesario para insertarlo en la tabla
+const tabla =  document.querySelector('.tabla'); // selecciona el div donde se insertara la tabla
+let contenidoTabla = ''; // Variable creada para generar dinamicamente el contenido de la tabla
 
-//llama el objeto paises del localStorage, necesario para insertarlo en la tabla
-paises = JSON.parse(localStorage.getItem('paises'));
+// cantidad de elementos a mostrar en la tabla
+let mostrarInicio = 0;
+let mostrarFinal = 0;
+let pivote = 0;
 
-// selecciona el div donde se insertara la tabla
-const tabla =  document.querySelector('.tabla');
+/**
+ * Debido a que la funcion mostar funciona con el local storage, si los datos estan almacenados
+ * en el local serán obtenidos primero y si no, mostraran los datos por default de 10
+ */
 
-// Variable creada para generar dinamicamente el contenido de la tabla
-let contenidoTabla = '';
-
-// Al dar clic en el boton Agregar este debe reenviar a una nueva ventana para agregar nuevos autores
-document.querySelector('#agregar_autor').addEventListener('click', function(){
+if (localStorage.getItem('mostrarFinal') && localStorage.getItem('pivote')) {
+    mostrarFinal = JSON.parse(localStorage.getItem('mostrarFinal'));
+    pivote = JSON.parse(localStorage.getItem('pivote'));
+} else {
+    mostrarFinal = 10;
+    pivote = 10;
+}
+/**
+ * Al dar clic en el boton Agregar este debe reenviar a una nueva ventana para agregar nuevos autores
+ */
+document.querySelector('#agregar_autor').addEventListener('click', () => {
     window.location.href='/admin/nuevo_autor.html';
 });
 
-// Crea dinamicamente la tabla con los autores a, representa autores y p, representa paices en las variables declaradas
+document.querySelector('#btn_show').addEventListener('click',() => {
+    mostrarFinal = document.querySelector('#txt_showRows').value;
+    pivote = document.querySelector('#txt_showRows').value;
+
+    if (mostrarFinal <= 0 || mostrarFinal > autores.length) {
+        document.querySelector('.alert').innerHTML = `Por favor ingrese un número entre 1 y ${autores.length}`
+    } else {
+        localStorage.setItem('mostrarFinal', mostrarFinal);
+        localStorage.setItem('pivote', pivote);
+
+        window.location.reload();   
+    }
+});
+
+/**
+ * Crea dinamicamente la tabla con los autores a, representa autores y p, representa paices en las variables declaradas
+ */
 for (var a in autores) {
     contenidoTabla += "<tr class='ocultar'>"
         contenidoTabla += `<td>${parseInt(a)+1}</td>`
@@ -27,6 +55,9 @@ for (var a in autores) {
         contenidoTabla += `<td id='${autores[a].autor_id}' onclick="AutorEliminar(${a})">Eliminar</td>`
 }
 
+/**
+ * Crea la tabla autores en el DOM
+ */
 tabla.innerHTML = `
     <table border=1>
     <thead>
@@ -43,52 +74,44 @@ tabla.innerHTML = `
     </table>
 `;
 
-// Obtiene los elementos con la etiquete tr para crear un array
-const tr = document.getElementsByTagName('TR');
-// Obtiene el boton "anterior" para crear la funcion de regresar
-const anterior = document.querySelector('#anterior');
-// Obttiene el boton "siguiente" para crear la funcion de avanzar
-const siguiente = document.querySelector('#siguiente');
-// Variable que permitira imprimir el inicio de los elementos mosrados en la pantalla
-let imprimirInicio = document.querySelector('.inicio');
-// Variable que permitira imprimir el final de los elementos mostrados en la pantalla
-let imprimirFinal = document.querySelector('.final');
-// Variable que permitira imprimir el total de datos almacenados y mostrarlos en pantalla
-let imprimirTotal = document.querySelector('.total');
-
-// cantidad de elementos a mostrar en la tabla
-let mostrarInicio = 0;
-let mostrarFinal = 10;
-let pivote = 10;
+const tr = document.getElementsByTagName('TR'); // Obtiene los elementos con la etiquete tr para crear un array
+const anterior = document.querySelector('#anterior'); // Obtiene el boton "anterior" para crear la funcion de regresar
+const siguiente = document.querySelector('#siguiente'); // Obttiene el boton "siguiente" para crear la funcion de avanzar
+let imprimirInicio = document.querySelector('.inicio'); // Variable que permitira imprimir el inicio de los elementos mosrados en la pantalla
+let imprimirFinal = document.querySelector('.final'); // Variable que permitira imprimir el final de los elementos mostrados en la pantalla
+let imprimirTotal = document.querySelector('.total'); // Variable que permitira imprimir el total de datos almacenados y mostrarlos en pantalla
 
 // todos los elementos en la tabla estan ocultos, la funcion hace que se muestren los elegidos por el usuaio, por defecto 10
 for (let i = mostrarInicio; i < tr.length; i++) {
     if (i < mostrarFinal){
-        tr[i].classList.remove('ocultar');
+        tr[i+1].classList.remove('ocultar');
     }
     imprimirInicio.innerHTML = `${mostrarInicio+1}`;
     imprimirFinal.innerHTML = `${mostrarFinal}`;
     imprimirTotal.innerHTML = `${autores.length}`;
+    OcultarBotonera();
 }
 
 /* La funcion recibe el indice del elemento a editar, lo guarda en una variable para poder realizar la edicion en la pantalla de edicion
 dicha variable es almacenada en localStorage para poder hacer uso de ella*/
 function AutorEditar(_autor) {
-    let autor;
-    for (let i in autores) {
-        if (_autor+1 == autores[i].autor_id) {
-            autor = _autor;
-        }
+    let confirmar = confirm('Quieres editar este autor?');
+    if (confirmar) {
+        localStorage.setItem('autor_edit', _autor);
+        window.location.href='/admin/editar_autores.html';
     }
-    autor = localStorage.setItem('autor_edit', autor);
-    window.location.href='/editar_autores.html';
 };
 
 // Elimina el autor sobre el cual se da clic en el boton eliminar
 function AutorEliminar(autor) {
-    autores.splice(autor, 1);
-    autores = localStorage.setItem('autores', JSON.stringify(autores));
-    window.location.reload();
+    let confirmar = confirm("Deseas eliminar estet autor?");
+    if (confirmar) {
+        autores.splice(autor, 1);
+        autores = localStorage.setItem('autores', JSON.stringify(autores));
+        window.location.reload();
+    } else {
+        alert('No se han realizado acciones');
+    }
 };
 
 /*
@@ -98,7 +121,10 @@ el valor de los articulos que se muestran en pantalla
 */
 function OcultarBotonera() {
     for (let i in tr) {
-        if (tr[1].getAttribute('class') == '') {
+        if (tr[1].getAttribute('class') == '' && tr[tr.length - 1].getAttribute('class') == '') {
+            anterior.classList.add('ocultar');
+            siguiente.classList.add('ocultar');
+        } else if (tr[1].getAttribute('class') == '') {
             anterior.classList.add('ocultar');
             siguiente.classList.remove('ocultar');
         } else if (tr[tr.length-1].getAttribute('class') == '') {
@@ -130,7 +156,7 @@ anterior.addEventListener('click', function(){
     
     imprimirInicio.innerHTML = `${mostrarInicio+1}`;
     imprimirFinal.innerHTML = `${mostrarFinal}`;
-    imprimirTotal.innerHTML = `${autores.length}`
+    imprimirTotal.innerHTML = `${autores.length}`;
     OcultarBotonera();
 });
 

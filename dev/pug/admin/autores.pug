@@ -4,11 +4,14 @@ block content
     div
         .nuevo_autor
             button#agregar_autor Agregar
+            p Cuantos elementos desea mostrar?
+            input#txt_showRows(type="number")
+            button#btn_show Mostrar
+            p.alert
         .contenedor.tabla
         .contenedor.nav
             button#anterior.ocultar Anterior
             p Del #[span.inicio] al #[span.final] de #[span.total]
-            //-input#mostrar(type="number", name="mostrar")
             button#siguiente Siguiente
 
             script(src="../assets/js/admin/autores.js")
