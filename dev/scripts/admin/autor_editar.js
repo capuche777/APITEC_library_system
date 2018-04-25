@@ -96,9 +96,5 @@ guardar.addEventListener('click', function() {
 
     autores[autor_edit] = autor;
     localStorage.setItem('autores', JSON.stringify(autores));
-    window.location.href='/autores.html';
-});
-
-document.querySelector('#btn_regresar').addEventListener('click', function(){
-    window.location.href='/autores.html';
+    window.location.href='/admin/autores.html';
 });

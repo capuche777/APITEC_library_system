@@ -30,9 +30,9 @@ block content
             p: input#txt_autor_fecha_fallecimiento(type="text", name="txt_autor_fecha_fallecimiento")
 
             label(for="txt_ingreso_fecha_autor") Fecha de Ingreso:
-            p: input#txt_ingreso_fecha_autor(type="text", name="txt_ingreso_fecha_autor")
+            p: input#txt_ingreso_fecha_autor(type="text", name="txt_ingreso_fecha_autor" disabled)
         
-        button#btn_regresar Regresar
+        button#btn_regresar: a(href="/admin/autores.html") Regresar
         button#btn_guardar Aceptar
     
-    script(src="assets/js/editar_autores.js")
+    script(src="../assets/js/admin/autor_editar.js")
