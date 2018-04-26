@@ -64,10 +64,6 @@ slcTema.addEventListener('change', function(){
     seleccionadoTema = this.options[slcTema.selectedIndex].value;
 });
 
-regresar.addEventListener('click', function(){
-    window.location.href='/libros.html'
-});
-
 aceptar.addEventListener('click', function(){
     var libro = {
         libro_id: librosID,

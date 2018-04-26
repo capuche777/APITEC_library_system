@@ -1,14 +1,27 @@
-extends ../includes/layout
-
-block content
-    div
+<!DOCTYPE html>
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Libros
+        link(rel="stylesheet", href="../assets/css/style.css")
+    body
+        div
+        h2.pagina Libros
         .nuevo_libro
-            button#agregar_libro Agregar
+            button#agregar_libro: a(href="./nuevo_libro.html") Agregar
+            p Cuantos elementos desea mostrar?
+            input#txt_showRows(type="number")
+            button#btn_show Mostrar
+            p.alert
         .contenedor.tabla
         .contenedor.nav
-            button#btn_anterior.ocultar Anterior
+            button#anterior.ocultar Anterior
             P Del #[span.inicio] al #[span.final] de #[span.total]
             //-input#mostrar(type="number", name="mostrar")
-            button#btn_siguiente Siguiente
+            button#siguiente Siguiente
 
-    script(src="../assets/js/admin/libros.js")
+        script(src="../assets/js/nav.js")
+        script(src="../assets/js/admin/libros.js")
+        
