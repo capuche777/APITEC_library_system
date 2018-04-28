@@ -1,3 +1,13 @@
+const admin_sesion = localStorage.getItem('admin_sesion'); // Obtiene si el usuario esta logueado
+
+/**
+ * Si el usuario no ha iniciado sesion sera enviado a la pantalla
+ * de logueo
+ */
+if (admin_sesion != 1) {
+    window.location.href = 'index.html'
+}
+
 // Obtiene los temas del local storage para ser impresos en el documento html
 temas = JSON.parse(localStorage.getItem('temas'));
 
@@ -28,9 +38,6 @@ if (localStorage.getItem('mostrarFinal') && localStorage.getItem('pivote')) {
     mostrarFinal = 10;
     pivote = 10;
 }
-
-// Objects.keys(objeto) devuelve el numero de propiedades que tiene un objeto, en este caso indico [i], ya que todos los objetos tienen el mismo numero de propiedades
-const llaves = Object.keys(temas[0]);
 
 /**
  * Al presionar el boton mostrar, se genera nuevamente el documento con el numero de

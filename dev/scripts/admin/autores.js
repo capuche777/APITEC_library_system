@@ -1,3 +1,13 @@
+const admin_sesion = localStorage.getItem('admin_sesion'); // Obtiene si el usuario esta logueado
+
+/**
+ * Si el usuario no ha iniciado sesion sera enviado a la pantalla
+ * de logueo
+ */
+if (admin_sesion != 1) {
+    window.location.href = 'index.html'
+}
+
 let autores = JSON.parse(localStorage.getItem('autores')); //llama el objeto autores del localStorage, necesario para la creacion de la tabla
 let paises = JSON.parse(localStorage.getItem('paises')); //llama el objeto paises del localStorage, necesario para insertarlo en la tabla
 const tabla =  document.querySelector('.tabla'); // selecciona el div donde se insertara la tabla

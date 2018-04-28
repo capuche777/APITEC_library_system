@@ -1,6 +1,8 @@
 let administradores; // Almacena los administradores registrados
 let admin_sesion; // Guarda el indice del administrador logueado
 
+localStorage.getItem('admin_sesion') == 1 ? window.location.href = './libros.html' : false;
+
 // Revisa si existe un objeto de administradores creado previamente
 localStorage.getItem('administradores') ? administradores = JSON.parse(localStorage.getItem('administradores')) : administradores = [];
 
@@ -27,6 +29,7 @@ ingresar.addEventListener('click', () => {
                 admin_sesion = localStorage.getItem('admin_sesion');
                 if (admin_sesion == 1) {
                     alert('exito');
+                    window.location.href = './libros.html'
                 }
             } else {
                 alert('usuario y contraseña no existen');
