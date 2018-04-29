@@ -50,7 +50,8 @@ function agregarTema() {
     const tema = {
         tema_id: topicID,
         tema: topic,
-        fecha_ingreso: dateTopic
+        fecha_ingreso: dateTopic,
+        total_libros: 0
     }
 
     temas.push(tema);

@@ -1,0 +1,169 @@
+autores = [
+    {
+        autor_id: 1,
+        nombre: 'Juan',
+        apellido: 'Perez',
+        nacionalidad: 6,
+        genero: 1,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 2,
+        nombre: 'Jeremias',
+        apellido: 'Enriquez',
+        nacionalidad: 45,
+        genero: 1,
+        nacimiento: '7/12/1983',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 3,
+        nombre: 'Daniel',
+        apellido: 'Guarchaj',
+        nacionalidad: 6,
+        genero: 1,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 4,
+        nombre: 'Gustavo',
+        apellido: 'Seijas',
+        nacionalidad: 6,
+        genero: 1,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 5,
+        nombre: 'Romilio',
+        apellido: 'Pazos',
+        nacionalidad: 6,
+        genero: 1,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 6,
+        nombre: 'Otto',
+        apellido: 'Perez',
+        nacionalidad: 6,
+        genero: 1,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 7,
+        nombre: 'Manuel',
+        apellido: 'Valdizon',
+        nacionalidad: 6,
+        genero: 1,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 8,
+        nombre: 'Sandra',
+        apellido: 'Torres',
+        nacionalidad: 6,
+        genero: 0,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 9,
+        nombre: 'Roxana',
+        apellido: 'Valdeti',
+        nacionalidad: 6,
+        genero: 0,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 10,
+        nombre: 'Joanne',
+        apellido: 'Marroquin',
+        nacionalidad: 6,
+        genero: 0,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 11,
+        nombre: 'Barbara',
+        apellido: 'Coello',
+        nacionalidad: 6,
+        genero: 0,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 12,
+        nombre: 'Maria',
+        apellido: 'Hernandez',
+        nacionalidad: 6,
+        genero: 0,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 13,
+        nombre: 'Juan',
+        apellido: 'Hernandez',
+        nacionalidad: 6,
+        genero: 1,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 14,
+        nombre: 'Daniel',
+        apellido: 'Garcia',
+        nacionalidad: 6,
+        genero: 1,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+},
+    {
+        autor_id: 15,
+        nombre: 'Victor',
+        apellido: 'Orellana',
+        nacionalidad: 6,
+        genero: 1,
+        nacimiento: '7/12/1986',
+        fallecimiento: '',
+        fecha_ingreso: '28/4/2018',
+        total_libros: 0
+}
+]
+
+localStorage.setItem('autores', JSON.stringify(autores));

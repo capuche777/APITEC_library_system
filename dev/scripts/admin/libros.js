@@ -122,9 +122,13 @@ for (let i = mostrarInicio; i < tr.length; i++) {
     // OcultarBotonera();
 }
 
-/**
- * Aqui va la funcion editar
- */
+let Editar = (_libro) => {
+    let confirmar = confirm('Quieres editar este libro?')
+    if (confirmar) {
+        localStorage.setItem('libro_edit', _libro);
+        window.location.href = './editar_libros.html';
+    }
+};
 
 /*
 La siguiente funcion oculta el boton anterior si el primer elemento no cuenta con la clase ocultar
@@ -151,27 +155,82 @@ el valor de los articulos que se muestran en pantalla
  * Inicialmente los botones siguiente y anterior estan ocultos,
  * la siguiente funcion hará que aparezcan automáticamente
  */
-(() => {
+/*(() => {
     if (mostrarFinal < libros.length) {
         siguiente.classList.remove('ocultar');
     }
 })();
+*/
+/*
+La siguiente funcion oculta el boton anterior si el primer elemento no cuenta con la clase ocultar
+y el boton siguiente si el ultimo elemento mostrado si tiene la clase ocultar. Al mismo tiempo actualiza
+el valor de los articulos que se muestran en pantalla
+*/
+function OcultarBotonera() {
+    for (let i in tr) {
+        if (tr[1].getAttribute('class') == '' && tr[tr.length-1].getAttribute('class') == '') {
+            anterior.classList.add('ocultar');
+            siguiente.classList.add('ocultar');
+        } else if (tr[1].getAttribute('class') == '') {
+            anterior.classList.add('ocultar');
+            siguiente.classList.remove('ocultar');
+        } else if (tr[tr.length-1].getAttribute('class') == '') {
+            siguiente.classList.add('ocultar');
+            anterior.classList.remove('ocultar');
+            imprimirFinal.innerHTML = `${libros.length}`;
+        }
+    }
+}
 
-/**
- * Funcion que actua vada vez que se presiona el boton siguiente
- */
-siguiente.addEventListener('click', () => {
-    mostrarInicio += pivote;
-    mostrarFinal += pivote;
-    for (const i in tr) {
-        if (i > mostrarInicio && i < mostrarFinal) {
+
+/*
+funcion que muestra los elementos en pantalla al presionar el boton anterior
+segun las variables, mostrarInicio, mostrarFinal, usando el pivote como contador
+de los elementos en pantalla
+*/
+anterior.addEventListener('click', function(){
+    mostrarInicio = mostrarInicio-pivote;
+    mostrarFinal = mostrarFinal-pivote;
+    siguiente.classList.remove('ocultar');
+    for (let i = 0; i < tr.length; i++) {
+        if (i == 0) {
             tr[i].classList.remove('ocultar');
-        } else {
+        } else if (i > mostrarInicio && i <= mostrarFinal) {
+            tr[i].classList.remove('ocultar');
+        } else if (i >= mostrarInicio) {
             tr[i].classList.add('ocultar');
-            tr[0].classList.remove('ocultar');
         }
     }
     
+    imprimirInicio.innerHTML = `${mostrarInicio+1}`;
+    imprimirFinal.innerHTML = `${mostrarFinal}`;
+    imprimirTotal.innerHTML = `${libros.length}`;
+    OcultarBotonera();
+});
+
+/*
+funcion que muestra los elementos en pantalla al presionar el boton siguientes
+segun las variables, mostrarInicio, mostrarFinal, usando el pivote como contador
+de los elementos en pantalla
+*/
+siguiente.addEventListener('click', function(){
+    mostrarInicio = mostrarInicio+pivote;
+    mostrarFinal = mostrarFinal+pivote;
+    anterior.classList.remove('ocultar');
+    for (let i = 0; i < tr.length; i++) {
+        /* TR1 en el indice 1 contiene los encabezados de la tabla, por esa razon no se les cambia la clase
+        si los elementos son menores al indice de mostrar esta agrega la clase ocultar para que no sean visibles*/
+        if (i == 0) {
+            tr[i].classList.remove('ocultar');
+        } else if (i > mostrarInicio && i <= mostrarFinal) {
+            tr[i].classList.remove('ocultar');
+        } else if (i <= mostrarInicio) {
+            tr[i].classList.add('ocultar');
+        }
+    }
     
-    
-})
+    imprimirInicio.innerHTML = `${mostrarInicio+1}`;
+    imprimirFinal.innerHTML = `${mostrarFinal}`;
+    imprimirTotal.innerHTML = `${libros.length}`
+    OcultarBotonera();
+});

@@ -1,7 +1,9 @@
-libros =  JSON.parse(localStorage.getItem('libros'));
-autores = JSON.parse(localStorage.getItem('autores'));
-temas = JSON.parse(localStorage.getItem('temas'));
-libro_edit = JSON.parse(localStorage.getItem('libro_edit'));
+let libros =  JSON.parse(localStorage.getItem('libros'));
+let autores = JSON.parse(localStorage.getItem('autores'));
+let temas = JSON.parse(localStorage.getItem('temas'));
+const libro_edit = JSON.parse(localStorage.getItem('libro_edit'));
+const autor_anterior = autores[libro_edit]['autor_id'];
+let autor_nuevo;
 
 let seleccionadoAutor = undefined;
 let seleccionadoTema =  undefined;
@@ -43,6 +45,7 @@ document.querySelector('#txt_libro_fecha').value =  libros[libro_edit].fecha_ing
 
 slcAutor.addEventListener('change', function(){
     seleccionadoAutor = this.options[slcAutor.selectedIndex].value;
+    autor_nuevo = this.options[slcAutor.selectedIndex].value;
 });
 
 slcTema.addEventListener('change', function(){
@@ -64,5 +67,5 @@ guardar.addEventListener('click', function(){
 
     libros[libro_edit] =  libro;
     localStorage.setItem('libros', JSON.stringify(libros));
-    window.location.href="/libros.html";
+    window.location.href="./libros.html";
 });

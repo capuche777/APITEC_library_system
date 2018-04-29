@@ -92,6 +92,7 @@ guardar.addEventListener('click', function() {
         nacimiento: document.querySelector('#txt_autor_fecha_nacimiento').value,
         fallecimiento: document.querySelector('#txt_autor_fecha_fallecimiento').value,
         fecha_ingreso: autores[autor_edit].fecha_ingreso,
+        total_libros: autores[autor_edit].total_libros
     }
 
     autores[autor_edit] = autor;

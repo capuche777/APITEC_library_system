@@ -150,7 +150,8 @@ function Agregar_Autor(){
         genero: genero,
         nacimiento: nacimiento.value,
         fallecimiento: muerte.value,
-        fecha_ingreso: autorIngresoFec
+        fecha_ingreso: autorIngresoFec,
+        total_libros: 0
     }
 
     autores.push(autor);

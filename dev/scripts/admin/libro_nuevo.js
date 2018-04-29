@@ -64,20 +64,46 @@ slcTema.addEventListener('change', function(){
     seleccionadoTema = this.options[slcTema.selectedIndex].value;
 });
 
-aceptar.addEventListener('click', function(){
-    var libro = {
-        libro_id: librosID,
-        titulo: document.querySelector('#txt_libro_titulo').value,
-        autor_id: parseInt(seleccionadoAutor),
-        tema_id: parseInt(seleccionadoTema),
-        ubicacion: document.querySelector('#txt_libro_ubicacion').value,
-        disponibles: parseInt(document.querySelector('#txt_libro_existencia').value),
-        fecha_ingreso: fecha
+aceptar.addEventListener('click', () => {
+    let titulo = document.querySelector('#txt_libro_titulo');
+    let autor =  seleccionadoAutor;
+    let tema = seleccionadoTema;
+    let existencia = document.querySelector('#txt_libro_existencia');
+    let ubicacion = document.querySelector('#txt_libro_ubicacion');
+    if (titulo.value != ""
+        && autor > 0
+        && tema >0
+        && existencia.value != ""
+        && ubicacion.value != "") {
+        var libro = {
+            libro_id: librosID,
+            titulo: titulo.value,
+            autor_id: parseInt(seleccionadoAutor),
+            tema_id: parseInt(seleccionadoTema),
+            ubicacion: ubicacion.value,
+            disponibles: parseInt(existencia.value),
+            fecha_ingreso: fecha
+        }
+        for (const autor in autores) {
+            if (autores[autor]['autor_id'] == seleccionadoAutor) {
+                autores[autor]['total_libros'] = parseInt(autores[autor]['total_libros'])+1;
+            }
+        }
+        for (const tema in temas) {
+            if (temas[tema]['tema_id'] == seleccionadoTema) {
+                temas[tema]['total_libros'] = parseInt(temas[tema]['total_libros'])+1;
+            }
+        }
+        libros.push(libro);
+        localStorage.setItem('libros', JSON.stringify(libros));
+        localStorage.setItem('autores', JSON.stringify(autores));
+        localStorage.setItem('temas', JSON.stringify(temas));
+        IncrementarLibroID();
+        LimpiarNuevoLibro();
+    } else {
+        alert('Debe Llenar todos los campos')
     }
-    libros.push(libro);
-    localStorage.setItem('libros', JSON.stringify(libros));
-    IncrementarLibroID();
-    LimpiarNuevoLibro();
+    
 });
 
 function IncrementarLibroID() {
