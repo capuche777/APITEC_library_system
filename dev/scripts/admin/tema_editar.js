@@ -12,7 +12,8 @@ function Tema_Editado() {
     var tema = {
         tema_id: temas[tema_edit]['tema_id'],
         tema: document.querySelector('#txt_editar_tema').value,
-        fecha_ingreso: temas[tema_edit]['fecha_ingreso']
+        fecha_ingreso: temas[tema_edit]['fecha_ingreso'],
+        total_libros: temas[tema_edit]['total_libros']
     }
     temas[tema_edit] = tema;
     localStorage.setItem('temas', JSON.stringify(temas));  

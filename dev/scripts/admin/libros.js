@@ -122,6 +122,11 @@ for (let i = mostrarInicio; i < tr.length; i++) {
     // OcultarBotonera();
 }
 
+/**
+ * @param {*} _libro
+ * Funcion creada para editar los libros, obtiene el indice del libropara posteriormente almacenarlo en
+ * localStorage y ser reenviado a la pantalla de edicion
+ */
 let Editar = (_libro) => {
     let confirmar = confirm('Quieres editar este libro?')
     if (confirmar) {
@@ -130,37 +135,18 @@ let Editar = (_libro) => {
     }
 };
 
-/*
-La siguiente funcion oculta el boton anterior si el primer elemento no cuenta con la clase ocultar
-y el boton siguiente si el ultimo elemento mostrado si tiene la clase ocultar. Al mismo tiempo actualiza
-el valor de los articulos que se muestran en pantalla
-*/
-/*function OcultarBotonera() {
-    for (let i in tr) {
-        if (tr[1].getAttribute('class') == '' && tr[tr.length-1].getAttribute('class') == '') {
-            anterior.classList.add('ocultar');
-            siguiente.classList.add('ocultar');
-        } else if (tr[1].getAttribute('class') == '') {
-            anterior.classList.add('ocultar');
-            siguiente.classList.remove('ocultar');
-        } else if (tr[tr.length-1].getAttribute('class') == '') {
-            siguiente.classList.add('ocultar');
-            anterior.classList.remove('ocultar');
-            imprimirFinal.innerHTML = `${libros.length}`;
-        }
-    }
-}*/
+const Eliminar = (libro) => {
+    const confirmar = confirm('Deseas eliminar el libro?');
 
-/**
- * Inicialmente los botones siguiente y anterior estan ocultos,
- * la siguiente funcion hará que aparezcan automáticamente
- */
-/*(() => {
-    if (mostrarFinal < libros.length) {
-        siguiente.classList.remove('ocultar');
+    if (confirmar) {
+        libros.splice(libro, 1);
+        localStorage.setItem('libros', JSON.stringify(libros));
+        window.location.reload();
+    } else {
+        alert('No se han realizado acciones.');
     }
-})();
-*/
+}
+
 /*
 La siguiente funcion oculta el boton anterior si el primer elemento no cuenta con la clase ocultar
 y el boton siguiente si el ultimo elemento mostrado si tiene la clase ocultar. Al mismo tiempo actualiza

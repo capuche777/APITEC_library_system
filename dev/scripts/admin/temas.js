@@ -118,11 +118,15 @@ function TemaEditar(_tema) {
 
 // Elimina el tema sobre el cual se da clic en el boton eliminar.
 function TemaEliminar(tema) {
-    let confirmar = confirm('Deseas eliminar el tema');
+    const confirmar = confirm('Deseas eliminar el tema');
     if (confirmar) {
-        temas.splice(tema, 1);
-        localStorage.setItem('temas', JSON.stringify(temas));
-        window.location.reload();
+        if (temas[tema]['total_libros'] != 0) {
+            alert(`El tema tiene ${temas[tema]['total_libros']} libro(s) asociado(s),\nelimine primero o cambie de categoria\ne intente nuevamente`);
+        } else {
+            temas.splice(tema, 1);
+            localStorage.setItem('temas', JSON.stringify(temas));
+            window.location.reload();
+        }
     } else {
         alert('No se ha realizado ninguna acción')
     }

@@ -116,9 +116,13 @@ function AutorEditar(_autor) {
 function AutorEliminar(autor) {
     let confirmar = confirm("Deseas eliminar estet autor?");
     if (confirmar) {
-        autores.splice(autor, 1);
-        autores = localStorage.setItem('autores', JSON.stringify(autores));
-        window.location.reload();
+        if (autores[autor]['total_libros'] != 0) {
+            alert(`El autor tiene ${autores[autor]['total_libros']} libro(s) asociado(s),\nelimine primero o cambie de autor\ne intente nuevamente`);
+        } else {
+            autores.splice(autor, 1);
+            autores = localStorage.setItem('autores', JSON.stringify(autores));
+            window.location.reload();
+        }
     } else {
         alert('No se han realizado acciones');
     }

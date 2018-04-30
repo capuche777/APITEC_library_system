@@ -23,8 +23,15 @@ function CargarAutores(el, i, arr) {
     selectAutor.appendChild(optionAutor);
 }
 
-autores.forEach(CargarAutores);
+autores.forEach(CargarAutores); // Llamada a la funcion para cargar los autores
 
+/**
+ * 
+ * @param {*} el se refiere a cada uno de los elementos dentro del array
+ * @param {*} i se refiere al indice de cada elemento
+ * @param {*} arr se refiere al objeto autores
+ * Inserta automaticamente los elementos en los option de temas
+ */
 function CargarTemas(el, i, arr) {
     const selecTema =  document.querySelector('#slc_libro_tema');
     const optionTema = document.createElement('option');
@@ -36,29 +43,32 @@ function CargarTemas(el, i, arr) {
     selecTema.appendChild(optionTema);
 }
 
-temas.forEach(CargarTemas);
+temas.forEach(CargarTemas); // Llamada a la funcion Cargar Temas
 
-const titulo = document.querySelector('#txt_libro_titulo');
-const autor = document.querySelector('#slc_libro_autor');
-const tema = document.querySelector('#slc_libro_tema');
-const existencia = document.querySelector('#txt_libro_existencia');
-const ubicacion = document.querySelector('#txt_libro_ubicacion');
-const fecha = document.querySelector('#txt_libro_fecha');
+const titulo = document.querySelector('#txt_libro_titulo'); // Obtiene el objeto titulo del formulario de edicion
+const autor = document.querySelector('#slc_libro_autor'); // Obtiene el elemento autor del formulario de edicion
+const tema = document.querySelector('#slc_libro_tema'); // Obtiene el elemento tema del formulario de edicion
+const existencia = document.querySelector('#txt_libro_existencia'); // Obtiene el elemento existencia del formulario de edicion
+const ubicacion = document.querySelector('#txt_libro_ubicacion'); // Obtiene el elemento ubicacion del formulario de edicion
+const fecha = document.querySelector('#txt_libro_fecha'); // Obtiene el elemento fecha del formulario de edicion
 
+// Inserta los valores previamente ingresados en cada input del formulario
 titulo.value = libros[libro_edit].titulo;
 autor.value = libros[libro_edit].autor_id;
-const autor_anterior = autor.value;
+const autor_anterior = autor.value; // Creada para almacenar el valor de autor previamente seleccionado, en caso de haber cambio sera utilizado
 tema.value = libros[libro_edit].tema_id;
-const tema_anterior = tema.value;
+const tema_anterior = tema.value; // Creada para almacenar el valor de tema previamente seleccionado, en caso de haber cambio sera utilizado
 existencia.value = libros[libro_edit].disponibles;
 ubicacion.value = libros[libro_edit].ubicacion;
 fecha.value =  libros[libro_edit].fecha_ingreso;
 
-const guardar =  document.querySelector('#btn_guardar');
+const guardar =  document.querySelector('#btn_guardar'); // Alcanza el boton guardar
 
-
-
+/**
+ * Cada vez que se clickea el boton guardar la siguiente funcion se ejecuta
+ */
 guardar.addEventListener('click', function(){
+// Valida que todos los campos esten llenos, en caso que el usuario olvide llenarlos nuevamente
     if (titulo.value != ""
         && autor.value > 0
         && tema.value > 0
@@ -66,9 +76,10 @@ guardar.addEventListener('click', function(){
         && existencia.value != ""
         && fecha.value != "") {
             
-            let _autor_nuevo = autor.value;
-            let _tema_nuevo = tema.value;
-    
+            let _autor_nuevo = autor.value; // Variable local que contiene el nuevo valor de autor en caso de que sea cambiado
+            let _tema_nuevo = tema.value; // Variable local que contiene el nuevo valor de tema en caso de que sea cambiado
+
+// Si se ha realizado un cambio en el formulario, el autor ha cambiado, si esto sucede se ejecuta la siguiente condicion
             if (autor_anterior != _autor_nuevo) {
                 for (const autor in autores) {
                     let n = parseInt(autores[autor].total_libros);
@@ -81,6 +92,7 @@ guardar.addEventListener('click', function(){
                 }
             }
 
+// Si se ha realizado un cambio en el formulario, el tema ha cambiado, si esto sucede se ejecuta la siguiente condicion
             if (tema_anterior != _tema_nuevo) {
                 for (const tema in temas) {
                     let n = parseInt(temas[tema].total_libros);
@@ -93,6 +105,7 @@ guardar.addEventListener('click', function(){
                 }
             }
 
+// Objeto que obtiene los nuevos datos de libro
             var libro = {
                 libro_id: libros[libro_edit].libro_id,
                 titulo: titulo.value,
@@ -112,8 +125,3 @@ guardar.addEventListener('click', function(){
         alert('Debe llenar todos los campos');
     }
 });
-
-/**
- * Validar el guardado
- */
-
