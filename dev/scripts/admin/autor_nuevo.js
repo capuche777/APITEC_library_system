@@ -1,3 +1,13 @@
+const admin_sesion = localStorage.getItem('admin_sesion'); // Obtiene si el usuario esta logueado
+
+/**
+ * Si el usuario no ha iniciado sesion sera enviado a la pantalla
+ * de logueo
+ */
+if (admin_sesion != 1) {
+    window.location.href = 'index.html'
+}
+
 // Array que almacena los autores ingresados
 let autores;
 // Array que almacena los objetos de los paices para poder trabajar con ellos

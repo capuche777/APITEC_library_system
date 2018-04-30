@@ -1,3 +1,13 @@
+const admin_sesion = localStorage.getItem('admin_sesion'); // Obtiene si el usuario esta logueado
+
+/**
+ * Si el usuario no ha iniciado sesion sera enviado a la pantalla
+ * de logueo
+ */
+if (admin_sesion != 1) {
+    window.location.href = 'index.html'
+}
+
 // Obtener los objetos necesarios del localStorage
 autores = JSON.parse(localStorage.getItem('autores'));
 autor_edit = parseInt(localStorage.getItem('autor_edit'));

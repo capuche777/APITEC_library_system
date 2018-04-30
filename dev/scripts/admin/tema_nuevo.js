@@ -1,6 +1,15 @@
- 
- let temas;
- let topicID = 0;
+const admin_sesion = localStorage.getItem('admin_sesion'); // Obtiene si el usuario esta logueado
+
+/**
+ * Si el usuario no ha iniciado sesion sera enviado a la pantalla
+ * de logueo
+ */
+if (admin_sesion != 1) {
+    window.location.href = 'index.html'
+}
+
+let temas;
+let topicID = 0;
 
  // Existe localStorage?
  
