@@ -1,15 +1,3 @@
-let sesion; // Declarada para usar si existe una sesion abierta
-
-// Si existe una sesion iniciada se obtiene el parametro y se declara la variable
-if (localStorage.getItem('sesion')) {
-    sesion = localStorage.getItem('sesion')
-}
-
-// Si no existe usa sesion abierta, automaticamente sera dirijido al formulario de logueo
-if (sesion != 1) {
-    window.location.href = '/';
-}
-
 let libros = JSON.parse(localStorage.getItem('libros')); // Obtener el objeto libros de localStorage
 let autores = JSON.parse(localStorage.getItem('autores')); // Obtener el objeto autores de localStorage
 let temas = JSON.parse(localStorage.getItem('temas')); // Obtener el objeto temas de localStorage
@@ -75,13 +63,12 @@ let fecha_devolucion =document.querySelector('.fecha_devolucion').innerHTML = `$
 const alfanumero = ['a','b','c','d','e','f','g','h','j','k','m','n','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9'];
 let token = "";
 for (let i = 0; i < 16; i++) {
-    token += alfanumero[Math.floor(Math.random()*57)];
+    token += alfanumero[Math.floor(Math.random() * (alfanumero.length - 0)) + 0];
+    //Math.floor(Math.random() * (11 - 0)) + 0;
 }
 
 const prestar = document.querySelector('#btn_prestar');
-prestar.addEventListener('click', Agregar_Prestamo);
-
-function Agregar_Prestamo() {
+prestar.addEventListener('click', () => {
     let prestamo = {
         prestamo_id: prestamoID,
         libro_id: libros[libro]['libro_id'],
@@ -94,7 +81,9 @@ function Agregar_Prestamo() {
     prestamos.push(prestamo);
     localStorage.setItem('prestamos', JSON.stringify(prestamos));
     Incrementar_ID();
-}
+    alert('El libro ha sido añadido al pretamos del usuario')
+    window.location.href = './libros.html';
+});
 
 function Incrementar_ID() {
     if (prestamos.length > 0) {

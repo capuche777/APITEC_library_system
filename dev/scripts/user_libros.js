@@ -1,15 +1,3 @@
-let sesion;
-/**
- * Chequear si existe sesion activa, si existe automaticamente envia a la pagina de libros, caso contrario
- * queda en la pantalla de registro
- */
-if (localStorage.getItem('sesion')) {
-    sesion = localStorage.getItem('sesion');
-}
-if (sesion != 1) {
-    window.location.href = '/';
-}
-
 let libros = JSON.parse(localStorage.getItem('libros'));
 let autores = JSON.parse(localStorage.getItem('autores'));
 let temas = JSON.parse(localStorage.getItem('temas'));

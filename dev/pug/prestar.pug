@@ -7,18 +7,7 @@ html(lang="en")
         title Prestar
         link(rel="stylesheet", href="assets/css/style.css")
     body
-        .container
-            .container--small
-                h2 Biblooteca
-            .container--small
-                ul
-                    li
-                        a(href="#") Libros
-                        a(href="autores.html") Autores
-                        a(href="temas.html") Temas
-                        a(href="prestamos.html") Prestamos
-                        a(href="perfil.html") Perfil
-                        a(href="salir") Salir
+        include includes/menu
         .container.info
             h3 Prestar Libro
         .container.tabla
@@ -52,4 +41,5 @@ html(lang="en")
             button#btn_regresar: a(href="libros.html") Regresar
             button#btn_prestar Prestar
 
+    include includes/scripts
     script(src="assets/js/user_prestar.js")

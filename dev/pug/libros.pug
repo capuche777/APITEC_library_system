@@ -7,34 +7,20 @@ html(lang="en")
         title Libros
         link(rel="stylesheet", href="../assets/css/style.css")
     body
-        .container
-            .container--small
-                h2 Biblooteca
-            .container--small
-                ul
-                    li: a(href="#") Libros
-                    li: a(href="autores.html") Autores
-                    li: a(href="temas.html") Temas
-                    li: a(href="prestamos.html") Prestamos
-                    li: a(href="perfil.html") Perfil
-                    ll: button#salir Salir
-            .contenedor.info
-                h3 Listado general de libros
-                p Buscar por
-                    select#slc_buscar(name="slc_buscar")
-                        option(value="nombre") Nombre
-                        option(value="autor") Autor
-                        option(value="tema") Tema
-                        option(value="ubicacion") Ubicación
-                    input#bus_bucar(name="bus_buscar" type="search")
-            .contenedor.tabla
-            .contenedor.nav
-                p Cuantos elementos desea mostrar?
-                input#txt_showRows(type="number")
-                button#btn_show Mostrar
-                p.alert
-                button#btn_anterior.ocultar Anterior
-                p Del #[span.inicio] al #[span.final] de #[span.total]
-                button#btn_siguiente Siguiente
-
-script(src="../assets/js/admin/user_libros.js")
+        include includes/menu
+        .contenedor.info
+            h3 Listado general de libros
+            include includes/buscador
+        .contenedor.tabla
+        .contenedor.nav
+            p Cuantos elementos desea mostrar?
+            input#txt_showRows(type="number")
+            button#btn_show Mostrar
+            p.alert
+            button#btn_anterior.ocultar Anterior
+            p Del #[span.inicio] al #[span.final] de #[span.total]
+            button#btn_siguiente Siguiente
+        include includes/scripts
+        script(src="../assets/js/user_libros.js")
+        // Contiene el script para realizar busquedas
+        script(src="../assets/js/srch.js")

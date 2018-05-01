@@ -252,6 +252,7 @@ function Registrar_Usuario(){
     usuarios.push(usuario);
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
     Usuario_ID_Sum();
+    alert('Usuario Registrado');
     Limpiar_Formulario();
 }
 
