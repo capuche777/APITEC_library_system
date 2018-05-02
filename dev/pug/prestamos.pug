@@ -14,15 +14,9 @@ html(lang="en")
         
         .contenedor
             h3 Historial
-            .buscador
-                h4 Buscar por
-                select#buscador(name="buscador")
-                    option(value="1") Nombre
-                    option(value="2") Tema
-                    option(value="3") Ubicacón
-                    option(value="")
-                    option(value="")
+            include includes/buscador
             .tabla-historial
         include includes/nav-tab
         include includes/scripts
         script(src="assets/js/user_prestamos.js")
+        // script(src="assets/js/srch.js")
