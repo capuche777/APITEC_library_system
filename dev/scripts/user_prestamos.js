@@ -27,9 +27,9 @@ for (const p in prestamos) {
 const tablaPrestamos = document.querySelector('.tabla-prestamos'); // Selecciona la tabla para imprimir los prestamos disponibles
 const tablaHistorial = document.querySelector('.tabla-historial'); // Selecciona la tabla para imprimir el historial de prestamos
 
-let inicio;
-let final;
-let pivote;
+let inicio = 0;
+let final = 0;
+let pivote = 0;
 
 // Variables para almacenar el contenido dinamico de prstamos e historial
 let contenidoPrestamos = '';

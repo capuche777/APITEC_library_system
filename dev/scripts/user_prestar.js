@@ -67,6 +67,10 @@ for (let i = 0; i < 16; i++) {
     //Math.floor(Math.random() * (11 - 0)) + 0;
 }
 
+document.querySelector('#btn_regresar').addEventListener('click', () => {
+    history.back();
+});
+
 const prestar = document.querySelector('#btn_prestar');
 prestar.addEventListener('click', () => {
     let prestamo = {
@@ -82,7 +86,7 @@ prestar.addEventListener('click', () => {
     localStorage.setItem('prestamos', JSON.stringify(prestamos));
     Incrementar_ID();
     alert('El libro ha sido añadido al pretamos del usuario')
-    window.location.href = './libros.html';
+    history.back();
 });
 
 function Incrementar_ID() {

@@ -11,7 +11,7 @@ buscarBarra.addEventListener('keyup', (e) => {
     const _busqueda = e.target.value.toLowerCase();
     let b = buscarPor.value;
     
-    for (const t in tr) {
+    for (var t = 0; t < tr.length; t++) {
         const autor = tr[t].children[b].innerText;
         if (autor.toLowerCase().indexOf(_busqueda) != -1) {
             tr[t].classList.remove('ocultar');
