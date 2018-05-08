@@ -19,16 +19,15 @@ if (localStorage.getItem('prestamos')) {
 /**
  * Variables declaradas para indicar que vamos a obtener una fecha
  */
-const d = new Date();
-const m = new Date();
-const y = new Date();
+const mili = Date.now(); // Obtiene la fecha de hoy en milisegundos
+let dia = new Date(mili);
+let hoy = dia.toLocaleDateString();
+let mili_dev = mili + 691200000;
+let dev_dia = new Date(mili_dev);
+let back = dev_dia.toLocaleDateString();
 
-/**
- * obtenemos la fecha actual utilizando las siguientes variables
- */
-const day = d.getDate();
-const month = m.getMonth();
-const year = y.getFullYear();
+hoy = hoy.split('/');
+back = back.split('/');
 
 document.querySelector('.titulo').innerHTML = libros[libro].titulo; // Imprime el titulo del libro solicitado en el campo correspondiente
 
@@ -57,33 +56,52 @@ for (const l in libros) {
 }
 document.querySelector('.ubicacion').innerHTML = libros[libro]['ubicacion']; // Imprime la ubicacion del libro en el campo correspondiente
 document.querySelector('.disponible').innerHTML = libros[libro]['disponibles']; // Imprime la cantidad de libros disponibles en el campo correspondiente
-let fecha_prestamo = document.querySelector('.fecha_prestamo').innerHTML = `${day}/${month+1}/${year}`; // Imprime la fecha actual como fecha de prestamo para un libro
-let fecha_devolucion =document.querySelector('.fecha_devolucion').innerHTML = `${day+8}/${month+1}/${year}`; // Imprime la fecha de devolucion del libro basado en la fecha del prestamo
+let fecha_prestamo = document.querySelector('.fecha_prestamo').innerHTML = `${hoy[1]}/${hoy[0]}/${hoy[2]}`; // Imprime la fecha actual como fecha de prestamo para un libro
+let fecha_devolucion =document.querySelector('.fecha_devolucion').innerHTML = `${back[1]}/${back[0]}/${back[2]}`; // Imprime la fecha de devolucion del libro basado en la fecha del prestamo
 
 const alfanumero = ['a','b','c','d','e','f','g','h','j','k','m','n','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9'];
+
 let token = "";
-for (let i = 0; i < 16; i++) {
-    token += alfanumero[Math.floor(Math.random() * (alfanumero.length - 0)) + 0];
-    //Math.floor(Math.random() * (11 - 0)) + 0;
+
+const Generar_Token = () => {
+    for (let i = 0; i < 16; i++) {
+        token += alfanumero[Math.floor(Math.random() * (alfanumero.length - 0)) + 0];
+    };
+
+    prestamos.forEach((el, i) => {
+        token == prestamos[i]['token'] ? Generar_Token() : token;
+    });
 }
+
+Generar_Token();
 
 document.querySelector('#btn_regresar').addEventListener('click', () => {
     history.back();
 });
 
+const Restar_Libro = () => {
+        libros[libro]['disponibles'] =  parseInt(libros[libro]['disponibles'])-1;
+}
+
 const prestar = document.querySelector('#btn_prestar');
+
 prestar.addEventListener('click', () => {
-    let prestamo = {
+
+    const prestamo = {
         prestamo_id: prestamoID,
         libro_id: libros[libro]['libro_id'],
         usuario_id: usuarios[logged_user]['usuario_id'],
-        fecha_prestamo: fecha_prestamo,
-        fecha_devolucion: fecha_devolucion,
+        fecha_prestamo: `${hoy[1]}/${hoy[0]}/${hoy[2]}`,
+        fecha_devolucion: `${back[1]}/${back[0]}/${back[2]}`,
         token: token,
         estado: 1
     }
+
+    Restar_Libro();
+
     prestamos.push(prestamo);
     localStorage.setItem('prestamos', JSON.stringify(prestamos));
+    localStorage.setItem('libros', JSON.stringify(libros));
     Incrementar_ID();
     alert('El libro ha sido añadido al pretamos del usuario')
     history.back();
